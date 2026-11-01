@@ -436,7 +436,7 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .cp-goals { display: grid; gap: 2px; margin: 0; padding: 6px 0 0; border-top: 1px solid #e5e7eb; list-style: none; font-size: 12px; }
 .cp-goals .is-them { color: #6b7280; text-align: right; }
 .cp-extra { margin: 0; color: #4b5563; font-size: 11px; }
-/* プレビューで共有シートが長くなるので、「カードで送る」はシートの下に付いてくる */
+/* プレビューで共有シートが長くなるので、「カードでおくるん」はシートの下に付いてくる */
 .card-picks #sendCards { position: sticky; bottom: 8px; z-index: 1; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18); }
 
 /* 交代：選手の行の「🔄 交代」、これまでの交代、入る選手の入力 */
