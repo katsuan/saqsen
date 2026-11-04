@@ -32,6 +32,7 @@ html { background-color: #eef7f1; }
 body { min-height: 100vh; font-family: var(--font); font-size: 16px; line-height: 1.6; color: var(--ink); background: #eef7f1; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: 16px 16px 48px; display: grid; gap: 16px; }
+/* 見出し：アイコン＋名前と横長のロゴを1行に（縦を詰める） */
 .top { display: grid; gap: 8px; }
 h1 { font-size: 22px; font-weight: 800; }
 
@@ -51,11 +52,9 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .ls-chip.color { width: 36px; padding: 0; border: 3px solid #fff; box-shadow: 0 0 0 1px var(--border); }
 .ls-chip.color[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--ink); }
 
-/* 見出しは1行：名前 … 中身の要約 › */
-.fold summary { display: flex; align-items: center; gap: 8px; list-style: none; cursor: pointer; font-weight: 800; }
+/* 見出しは1行：名前 … 中身の要約 ›。押せるところは 44px（上下に広げ、同じだけ外の余白を減らして、見た目の間は前のまま） */
+.fold summary { display: flex; align-items: center; gap: 8px; min-height: 44px; margin: -9px 0; list-style: none; cursor: pointer; font-weight: 800; }
 .fold summary::-webkit-details-marker { display: none; }
-/* 押せるところは 44px（上下に広げ、同じだけ外の余白を減らして、見た目の間は前のまま） */
-.fold summary { min-height: 44px; margin: -9px 0; }
 .fold summary .meta { margin-left: auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .fold summary::after { content: ""; flex: none; width: 16px; height: 16px; margin-left: auto; background: var(--ink-soft); -webkit-mask: var(--ls-i-next) center / contain no-repeat; mask: var(--ls-i-next) center / contain no-repeat; transition: transform 0.2s; }
 .fold summary .meta + ::after, .fold summary:has(.meta)::after { margin-left: 0; }
@@ -102,25 +101,24 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .tokens { position: absolute; inset: 0; }
 .board.is-drawing .tokens { pointer-events: none; }
 
-.token { position: absolute; display: grid; justify-items: center; gap: 1px; width: 64px; margin-left: -32px; margin-top: -16px; cursor: grab; touch-action: none; }
+.token { position: absolute; display: grid; justify-items: center; gap: 1px; width: 64px; margin-left: -32px; margin-top: -16px; cursor: grab; touch-action: none; -webkit-touch-callout: none; }
 .token b { display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid #fff; border-radius: 50%; background: var(--accent); color: #fff; font-size: 13px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
 /* 名前：白い文字がピッチの白線と重なっても読めるよう、半透明の濃い札に入れる */
 .token small { max-width: 64px; overflow: hidden; padding: 0 5px; border-radius: 999px; background: rgba(16, 36, 24, 0.72); color: #fff; font-size: 11px; font-weight: 800; line-height: 15px; white-space: nowrap; text-overflow: ellipsis; }
 .token small:empty, .hide-names .token small, .hide-marks .token .marks { display: none; }
-/* 👁 表示：左に項目名、右に選ぶボタン（同じ幅で並べる） */
+/* 表示：左に項目名、右に選ぶボタン（同じ幅で並べる） */
 .view-tools { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px 8px; padding: 8px 4px 4px; }
 .view-tools[hidden] { display: none; }
 .view-tools > .ls-label { font-size: 12px; font-weight: 800; }
 .view-tools .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; }
-.view-tools .seg .ls-chip { padding: 0 8px; font-size: 12px; }
+.view-tools .seg .ls-chip { padding: 0 8px; font-size: 12px; white-space: nowrap; }
 .view-tools .hint, .view-tools .link { grid-column: 1 / -1; margin: 0; }
 .view-tools .link { justify-self: start; text-align: left; }
-.view-tools .seg .ls-chip { white-space: nowrap; }
 .token.is-ball { width: 28px; margin-left: -14px; margin-top: -14px; font-size: 22px; line-height: 1; }
 .token.is-dragging { cursor: grabbing; z-index: 2; }
 
-.link { border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 13px; font-weight: 700; text-decoration: underline; cursor: pointer; }
-.link { min-height: 44px; margin: -12px 0; padding: 0 8px; } /* 押せるところは 44px（見た目の間は前のまま） */
+/* 押せるところは 44px（見た目の間は前のまま） */
+.link { min-height: 44px; margin: -12px 0; padding: 0 8px; border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 13px; font-weight: 700; text-decoration: underline; cursor: pointer; }
 
 .actions { display: grid; gap: 8px; }
 /* ボタンは Q キット（ls-button）。押しやすいよう大きめ */
@@ -131,7 +129,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .qumiawase-box { display: grid; gap: 8px; padding: 8px; border-radius: 12px; background: var(--soft-2); }
 .qumiawase-box[hidden] { display: none; }
 
-.score { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 8px; }
+.score { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 8px; }
+.score > i { display: block; }
 .score span { padding-bottom: 8px; font-size: 22px; font-weight: 800; }
 .score input { font-size: 22px; font-weight: 800; text-align: center; }
 /* スコアの − 数 ＋（キロっくの回数入力と同じ：1つの枠に、控えめな − ＋ と真ん中の数） */
@@ -151,8 +150,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .goal.is-them .scorer { grid-template-columns: minmax(0, 1fr) auto; }
 .goal input { min-width: 0; padding: 8px; font-size: 16px; }
 .goal .min { text-align: center; }
-.goal .remove { width: 26px; height: 26px; padding: 0; font-size: 12px; border: 1px solid var(--border); border-radius: 50%; background: var(--card); color: var(--ink-soft); cursor: pointer; }
-.goal .remove { position: relative; flex: none; }
+.goal .remove { position: relative; flex: none; width: 26px; height: 26px; padding: 0; font-size: 12px; border: 1px solid var(--border); border-radius: 50%; background: var(--card); color: var(--ink-soft); cursor: pointer; }
 .goal .remove::after { content: ""; position: absolute; inset: -9px; } /* 見た目は 26px、押せるところは 44px */
 
 .foot { font-size: 12px; color: var(--ink-soft); }
@@ -161,22 +159,16 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 /* ---- 下から出るシート（選手の入力・画像） ---- */
 .sheet { position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-end; justify-content: center; padding: 16px; background: rgba(15, 30, 20, 0.45); }
 .sheet-card { display: grid; gap: 8px; width: min(100%, 440px); max-height: 100%; overflow: auto; padding: 16px; border-radius: 20px; background: var(--card); }
-.sheet-title { font-weight: 800; }
 .sheet-card img { width: 100%; border-radius: 12px; -webkit-touch-callout: default; }
 
 /* 範囲選択 */
 .marquee { position: absolute; border: 2px dashed #fff; border-radius: 6px; background: rgba(255, 255, 255, 0.15); pointer-events: none; }
 .token.is-selected b { box-shadow: 0 0 0 3px #ffd23f, 0 2px 6px rgba(0, 0, 0, 0.25); }
 .token.is-ball.is-selected { filter: drop-shadow(0 0 4px #ffd23f); }
-.hint.left { text-align: left; }
 .hint.is-error { color: var(--ls-danger); font-weight: 700; }
 #imageStatus { white-space: pre-line; } /* 画像を保存しているときの経過秒数と、遅いときのわけ（2行） */
 
-/* フォーメーション：自チームと相手を左右に並べ、縦に選ぶ */
 .fold[open] { gap: 8px; }
-
-
-/* フォーメーションの欄の下の「位置を戻す」は、左右の列をまたいで置く */
 
 /* 作戦盤のカード：見出し（人数・フォーメーション）・ピッチ・操作をひとまとめに */
 .board-card { gap: 8px; }
@@ -197,8 +189,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .choice b { font-size: 16px; }
 .choice small { font-size: 12px; color: var(--ink-soft); }
 .choice:disabled { opacity: 0.6; cursor: progress; }
-/* 送るカードを選ぶ（チェックの付いた札） */
-/* 送るカードは2枚を横に並べる（LINE でも横に並ぶので、同じ見え方に）。ボタンと説明は下に全幅 */
+/* 送るカードを選ぶ（チェックの付いた札）。2枚を横に並べる（LINE でも横に並ぶので、同じ見え方に）。ボタンと説明は下に全幅 */
 /* 2枚のカードは、高いほうに高さをそろえる（札を縦いっぱいにし、カードを下まで伸ばす） */
 .card-picks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: 8px; }
 .card-picks > .pick { align-content: start; }
@@ -292,11 +283,9 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 /* 日にち・時間：iPhone は標準の見た目のままだと幅・高さ・文字の位置がほかの欄とずれるので、見た目をそろえる（おくるんの共通スタイルと同じ） */
 input[type="date"], input[type="time"] { appearance: none; -webkit-appearance: none; display: block; min-width: 0; min-height: 48px; text-align: left; }
 input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-date-and-time-value { text-align: left; }
-.score > i { display: block; }
-.score { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
-/* スコアの上のチーム名（👕 チームの欄で入れた名前。長ければ「…」） */
+/* スコアの上のチーム名（チームの欄で入れた名前。長ければ「…」） */
 .score .ls-label { overflow: hidden; padding-bottom: 0; font-size: 13px; text-align: center; white-space: nowrap; text-overflow: ellipsis; }
-/* 🏆 試合結果の中の小見出し（得点者・MVP） */
+/* 試合結果の中の小見出し（得点者・MVP） */
 .sub-head { display: flex; align-items: center; gap: 8px; margin: 4px 0 0; padding-top: 8px; border-top: 1px solid var(--border); font-size: 14px; font-weight: 800; }
 
 /* スコアのカードの中でたたむ「得点の内訳」 */
@@ -307,11 +296,7 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .period-row span:not(.ls-label) { font-size: 18px; font-weight: 800; }
 .period-row input { padding: 8px; font-size: 16px; font-weight: 800; text-align: center; }
 
-/* 見出し：アイコン＋名前と横長のロゴを1行に（縦を詰める） */
-.top { gap: 8px; }
-
-/* キャッチコピー（見出しの行のすぐ下。おくるんの「つくって、おくるん」と同じ役目） */
-/* 見出しの行は Q キット（ls-brand）。名前は少し小さく、ひとことはうすい字（色は送るボタンだけ） */
+/* 見出しの行は Q キット（ls-brand）。名前は少し小さく、すぐ下のひとこと（おくるんの「つくって、おくるん」と同じ役目）はうすい字（色は送るボタンだけ） */
 .ls-brand { padding: 0 4px; }
 .ls-brand-name { font-size: 20px; line-height: 1.2; }
 .ls-brand-icon { width: 28px; height: 28px; }
@@ -326,7 +311,7 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .line-shape-row .ls-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
 .line-shape-row .ls-chip { min-height: 34px; padding: 0 4px; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* 📐 並び：盤のすぐ下。フォーメーションのボタン（横に並べて、あふれたら横にすべらせる）と列ごとの形 */
+/* 並び：盤のすぐ下。フォーメーションのボタン（横に並べて、あふれたら横にすべらせる）と列ごとの形 */
 .shape-tools { display: grid; gap: 8px; padding: 8px 4px 4px; }
 .shape-tools[hidden] { display: none; }
 
@@ -335,13 +320,12 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .token .marks .mark-icon + .mark-icon { margin-left: -0.4em; }
 .token .mark-num { margin-right: 1px; }
 .token .marks { position: absolute; top: 14px; left: calc(50% + 7px); padding: 0 5px; border-radius: 999px; background: rgba(255, 255, 255, 0.95); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); font-size: 11px; font-style: normal; line-height: 16px; white-space: nowrap; pointer-events: none; }
-/* 選手のシートの印の欄：左に名前、右に − 数 ＋ */
 /* オウンゴールのボール：⚽ に赤を重ねた絵（ほかの絵文字と同じ大きさに） */
 /* 赤いボールの絵は 26px の字を高さ 36px の中に、下から 9px の所を文字の線（ベースライン）にして描いてある（share.js の redBall）。
    字の大きさに合わせて 36/26 em にし、絵の下を文字の線より少し下に出す（キャンバスの絵文字は画面の絵文字より少し下に描かれるので、9/26 em より浅い -0.17em で ⚽ とそろう） */
 .token .marks .is-own-goal, .token .sub-goals .is-own-goal { display: inline-block; height: 1.385em; width: auto; margin: -0.19em 0; vertical-align: -0.17em; }
 
-/* 📐 並び：自チーム・相手のタブ（2つの切りかえ）、人数とフォーメーションのプルダウンを1行に */
+/* 並び：自チーム・相手のタブ（2つの切りかえ）、人数とフォーメーションのプルダウンを1行に */
 .shape-tabs { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: var(--soft-2); }
 .shape-tab { min-height: 34px; border: 0; border-radius: 999px; background: none; color: var(--ink); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
 .shape-tab[aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); }
@@ -353,14 +337,10 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .custom-row[hidden] { display: none; }
 .custom-row input { min-width: 0; min-height: 40px; padding: 0 16px; border: 2px solid var(--border); border-radius: 12px; font: inherit; font-size: 16px; }
 
-/* 選手のシートの印の欄のオウンゴール：赤いボールを文字と同じ大きさに */
-
-/* はじめての方への案内（作戦盤のカードのいちばん上） */
-
 /* 長押しのメニュー：印をすぐ付ける（丸のそばに浮かせる） */
 .quick-marks { position: fixed; z-index: 30; display: grid; gap: 8px; overflow-y: auto; overscroll-behavior: contain; width: min(320px, calc(100vw - 16px)); padding: 16px; border-radius: 16px; background: var(--card); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22); }
 .quick-marks[hidden] { display: none; }
-.quick-head { display: flex; align-items: center; justify-content: space-between; }
+.quick-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .quick-title { margin: 0; font-size: 15px; font-weight: 800; }
 .quick-close { width: 32px; height: 32px; border: 0; border-radius: 50%; background: var(--soft-2); color: var(--ink-soft); font: inherit; font-size: 16px; cursor: pointer; }
 .quick-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
@@ -384,13 +364,11 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* 今の数（右上の小さな丸） */
 .quick-count { position: absolute; top: -6px; right: -4px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 11px; font-style: normal; font-weight: 800; line-height: 18px; }
 .quick-more { border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 12px; font-weight: 700; text-decoration: underline; cursor: pointer; }
-.token { -webkit-touch-callout: none; }
 
 /* ひとことのひな形（タップで次の行に足す） */
 .note-presets .ls-chip { min-height: 36px; padding: 0 8px; font-size: 12px; }
 
-/* 送る前のプレビュー（共有シートの、それぞれのカードの中身） */
-/* 送る前のプレビュー：おくるんのカード（Flex）と同じ並びを小さく。チェックの下に全幅で */
+/* 送る前のプレビュー（共有シートの、それぞれのカードの中身）：おくるんのカード（Flex）と同じ並びを小さく。チェックの下に全幅で */
 .pick-preview { grid-column: 1 / -1; display: block; }
 /* 横に2枚なので、カードは中身ごと縮めて見せる（zoom：中の並びは実物の幅のまま、小さく描く） */
 .pick-preview .cp, .pick-preview .cp-empty { zoom: 0.58; }
@@ -438,10 +416,9 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* プレビューで共有シートが長くなるので、「カードでおくるん」はシートの下に付いてくる */
 .card-picks #sendCards { position: sticky; bottom: 8px; z-index: 1; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18); }
 
-/* 交代：選手の行の「🔄 交代」、これまでの交代、入る選手の入力 */
+/* 交代：選手の行の「交代」、これまでの交代、入る選手の入力 */
 .quick-sub-open { margin-left: auto; padding: 4px 8px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--ink); font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; white-space: nowrap; }
 .quick-sub-open[aria-pressed="true"] { border-color: var(--accent); background: var(--ls-accent-soft); color: var(--ls-accent-ink); }
-.quick-head { gap: 8px; }
 .quick-subs { display: grid; gap: 4px; padding: 8px 8px; border-radius: 10px; background: var(--soft-2); font-size: 12px; }
 .quick-subs p { margin: 0; }
 .quick-subs .quick-more { justify-self: start; padding: 0; }
@@ -455,14 +432,14 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* 交代前の選手の得点：🔄 の右下に小さく */
 .token .sub-goals { position: absolute; top: 4px; left: calc(50% + 18px); padding: 0 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.95); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); font-size: 8px; font-style: normal; line-height: 12px; white-space: nowrap; pointer-events: none; }
 
-/* ---- 暗い表示（index.html の data-ls-dark="auto"。Q キットの色は ui.css が暗くする） ----
- * ピッチ・選手の丸・送るカードの見本（.cp-*。LINE のカードの見た目）は明るいまま。
- */
 /* ---- Q キットの部品の上書き（Q キットがそろえたら消す） ----
  * 選んでいるチップは、色の面ではなく濃いふちと字で（Q キットはまだツールの色。ユーザーが選んだ形。Q キットがそろえたら消す）
  */
 .ls-chip[aria-pressed="true"]:not(.color), .ls-chip[aria-checked="true"]:not(.color), .ls-chip.is-active:not(.color), .ls-chip:has(input:checked):not(.color) { border-color: var(--ls-text); background: var(--ls-surface); color: var(--ls-text); }
 
+/* ---- 暗い表示（index.html の data-ls-dark="auto"。Q キットの色は ui.css が暗くする） ----
+ * ピッチ・選手の丸・送るカードの見本（.cp-*。LINE のカードの見た目）は明るいまま。
+ */
 @media (prefers-color-scheme: dark) {
   :root[data-ls-dark="auto"] {
     --ink: #e9efe9;
@@ -471,11 +448,10 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
     --card: #1b211d;
     --soft: #243029;
     --soft-2: #262d29;
-      --ls-line-strong: rgba(255, 255, 255, 0.24);
+    --ls-line-strong: rgba(255, 255, 255, 0.24);
     --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    background-color: #121815;
   }
-
-  :root[data-ls-dark="auto"] { background-color: #121815; }
   :root[data-ls-dark="auto"] body { background: #121815; }
   :root[data-ls-dark="auto"] .sheet { background: rgba(0, 0, 0, 0.6); }
   :root[data-ls-dark="auto"] .ls-chip.color { border-color: #1b211d; }

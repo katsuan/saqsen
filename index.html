@@ -87,7 +87,7 @@
           <input id="customFormation" inputmode="numeric" maxlength="14" placeholder="例：3241（後ろの列から）" aria-label="カスタムのフォーメーション">
           <button id="customApply" class="ls-button is-primary is-block small" type="button">決める</button>
         </div>
-        <p id="shapeNote" class="hint left"></p>
+        <p id="shapeNote" class="hint"></p>
         <div id="lineShapes" class="line-shapes" aria-label="列ごとの形"></div>
       </div>
       <div id="penTools" class="ls-chips pen-tools" hidden>
@@ -123,7 +123,7 @@
           <button class="ls-chip" type="button" role="radio" data-court-view="portrait">縦</button>
           <button class="ls-chip" type="button" role="radio" data-court-view="landscape">横</button>
         </div>
-        <p class="hint left">コートの「自動」は、横に広い画面（スマホの横向き・パソコンなど）で横のコートになります。フルコートは両チームが互い違いに、コート別は半分ずつ並びます。選手名・得点などを出さないと、画像・カードのリンクからも外します（入れたものは消えません）。</p>
+        <p class="hint">コートの「自動」は、横に広い画面（スマホの横向き・パソコンなど）で横のコートになります。フルコートは両チームが互い違いに、コート別は半分ずつ並びます。選手名・得点などを出さないと、画像・カードのリンクからも外します（入れたものは消えません）。</p>
         <button id="clearMarks" class="link" type="button" hidden>カード・アシストの印をすべて消す（得点者・名前・背番号は残す）</button>
       </div>
 
@@ -140,7 +140,7 @@
       </div>
       <datalist id="tacticPresets"><option value="ビルドアップ"><option value="コーナーキック（攻め）"><option value="コーナーキック（守り）"><option value="フリーキック"><option value="キックオフ"><option value="守備の形"><option value="プレス"></datalist>
       <ul id="tacticList" class="tactic-list"></ul>
-      <p class="hint left">選手の位置・相手・ボール・線を保存します。開くと今の作戦盤に呼び出します（「戻す」で元に戻せます）。チームの色はそのままです。この端末に残ります。</p>
+      <p class="hint">選手の位置・相手・ボール・線を保存します。開くと今の作戦盤に呼び出します（「戻す」で元に戻せます）。チームの色はそのままです。この端末に残ります。</p>
     </details>
 
     <!-- チーム・試合結果：自チームと相手を左右に並べ、チーム名・色、その下にスコア・内訳・得点者・ひとこと（結果）。
@@ -173,7 +173,7 @@
       <!-- 得点の内訳（前半・後半・延長・PK）。スコアのカードの中でたたむ。入れたものだけカードに出る -->
       <details class="fold inner">
         <summary><span class="ls-icon" data-icon="clock" aria-hidden="true"></span>前後半・延長・PK <span id="periodMeta" class="meta"></span></summary>
-        <p class="hint left">上のスコアは延長も入れた最終スコア。ここは入れたものだけカードに出ます。同点のときは PK で勝ち負けを決めます。</p>
+        <p class="hint">上のスコアは延長も入れた最終スコア。ここは入れたものだけカードに出ます。同点のときは PK で勝ち負けを決めます。</p>
         <div class="period-row">
           <span class="ls-label">前半</span>
           <input id="halfUs" type="number" inputmode="numeric" min="0" max="99" aria-label="前半の自チームの得点">
@@ -202,7 +202,7 @@
       <!-- 得点者（任意。MVP などはひとこと（結果）に書く） -->
       <p class="sub-head"><span class="ls-icon" data-icon="ball" aria-hidden="true"></span>得点者 <span id="goalsMeta" class="meta"></span></p>
       <!-- 得点者は選手の長押し（ゴール・OG）とつながっている。アシスト・カードは作戦盤の印のままカードに入る -->
-      <p id="marksNote" class="hint left" hidden></p>
+      <p id="marksNote" class="hint" hidden></p>
       <div id="goals" class="goals"></div>
       <div class="two">
         <button id="addGoalUs" class="ls-button is-block small" type="button">＋ 自チーム</button>
@@ -218,7 +218,7 @@
       </div>
       <!-- くみあわせ（トーナメント・総当たり）の「さくせん盤で開く」から来た試合のときだけ：結果をくみあわせに戻す -->
       <div id="qumiawaseBox" class="qumiawase-box" hidden>
-        <p class="hint left">くみあわせの試合です。点を入れたら、くみあわせに戻せます（ちがう端末のときは、結果のリンクを送ってね）。</p>
+        <p class="hint">くみあわせの試合です。点を入れたら、くみあわせに戻せます（ちがう端末のときは、結果のリンクを送ってね）。</p>
         <div class="two">
           <button id="backToQumiawase" class="ls-button is-block small" type="button"><span class="ls-icon" data-icon="trophy" aria-hidden="true"></span>くみあわせに結果を戻す</button>
           <button id="shareQumiawase" class="ls-button is-block small" type="button"><span class="ls-icon" data-icon="link" aria-hidden="true"></span>結果のリンク</button>
@@ -231,7 +231,7 @@
 
     <details class="ls-panel fold">
       <summary><span class="ls-icon" data-icon="place" aria-hidden="true"></span>会場情報 <span id="infoMeta" class="meta"></span></summary>
-      <p class="hint left">入れたものだけ、送るカードに入ります。場所は「保存」すると、次から ▼ で選べます。</p>
+      <p class="hint">入れたものだけ、送るカードに入ります。場所は「保存」すると、次から ▼ で選べます。</p>
       <div class="two">
         <label>日にち<input class="when-date" type="date"></label>
         <label>時間<input class="when-time" type="time"></label>
