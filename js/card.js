@@ -4,11 +4,11 @@
 
 // ---- おくるんへのリンク ----
 // スタメン（選手の位置）の中身。おくるんのカードにも、作戦盤を開くリンクにも使う。
-// 👁️ 表示に合わせる：選手名を出さないなら名前を外し、相手を出しているなら相手（op: [[背番号, 名前, x, y], ...]・oc: 相手の色）も入れる
+// 表示に合わせる：選手名を出さないなら名前を外し、相手を出しているなら相手（op: [[背番号, 名前, x, y], ...]・oc: 相手の色）も入れる
 const roundPos = (v) => Math.round(v); // リンクの位置は整数に（短くするため）
 // スタメン（選手の位置）の中身を返す。おくるんのカードにも、作戦盤を開くリンクにも使う
 const lineupData = () => {
-  // 👁️ 表示に合わせた選手の名前（名前を出さないときは ""）を返す
+  // 表示に合わせた選手の名前（名前を出さないときは ""）を返す
   const name = (p) => (state.showNames === false ? "" : p.name || "");
   return {
     m: state.mode,
@@ -105,7 +105,7 @@ function lineupPreviewEl() {
   const q = lineupCardQuery();
   const pitch = el("div", `cp-pitch${state.mode === "futsal" ? " is-futsal" : ""}`);
   pitch.innerHTML = '<i class="is-half"></i><i class="is-circle"></i><i class="is-box-top"></i><i class="is-box-bottom"></i>';
-  // カードに渡すのと同じ中身（相手・名前は 👁️ 表示どおり）で描く
+  // カードに渡すのと同じ中身（相手・名前は 表示どおり）で描く
   const data = lineupData();
   pitch.classList.toggle("is-vs", Boolean(data.op)); // 相手も描くときは縦に長く（おくるんのカードと同じ）
   // ミニのピッチに、チームのこまを並べる
@@ -240,7 +240,7 @@ function resultCardQuery() {
 // その画像を写真にしたお知らせカードをおくるんで開く
 const IMAGE_API = "https://liff-image.onrender.com";
 
-// 🖼️ 作戦を画像で送る：作戦盤の画像を画像サーバーに保存し、その画像のカードをおくるんで開く
+// 作戦を画像で送る：作戦盤の画像を画像サーバーに保存し、その画像のカードをおくるんで開く
 async function sendBoardImage() {
   const button = $("sendBoardImage");
   if (button.disabled) return;

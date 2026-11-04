@@ -14,7 +14,7 @@ const toView = (x, y) => (landscape ? [100 - y, x] : [x, y]);
 const fromView = (vx, vy) => (landscape ? [vy, 100 - vx] : [vx, vy]);
 // 横に広い画面（スマホの横向き・パソコン）かを返す
 const wideScreen = () => window.matchMedia("(min-aspect-ratio: 5/4) and (min-width: 600px)").matches;
-// コートを横にするかを、👁️ 表示の向きと画面の形から決めて返す
+// コートを横にするかを、表示の向きと画面の形から決めて返す
 function updateLandscape() {
   landscape = state.courtView === "landscape" || ((state.courtView || "auto") === "auto" && wideScreen());
   return landscape;
@@ -56,7 +56,7 @@ function render() {
   renderTeamPanel();
 }
 
-// 📐 並びの欄（相手の並びの直し・フォーメーションのプルダウン・カスタム・列ごとの形）を描きなおす
+// 並びの欄（相手の並びの直し・フォーメーションのプルダウン・カスタム・列ごとの形）を描きなおす
 function renderFormationPanel(court) {
   // 相手のフォーメーション（人数を変えたあとは ""＝今の相手をそのまま使う）。
   // 今のコートより人数が多い並び（フットサルなのにサッカーの 4-4-2 など）は、自チームの並びにそろえる。
@@ -89,7 +89,7 @@ function renderFormationPanel(court) {
     setShowOpp(true);
     render();
   };
-  // 📐 並びの欄：自チーム・相手のタブ、人数、フォーメーション（プルダウン）、列ごとの形
+  // 並びの欄：自チーム・相手のタブ、人数、フォーメーション（プルダウン）、列ごとの形
   const opp = shapeSide === "opp";
   $("shapeTabOurs").setAttribute("aria-selected", String(!opp));
   $("shapeTabOpp").setAttribute("aria-selected", String(opp));
@@ -152,7 +152,7 @@ function renderFormationPanel(court) {
   renderLineShapes(opp ? "opp" : "ours");
 }
 
-// 作戦盤の道具（👁️ 表示・ペン・📐 並び・↩️ 戻す・案内の文・ペンの色）を描きなおす
+// 作戦盤の道具（表示・ペン・並び・戻す・案内の文・ペンの色）を描きなおす
 function renderBoardTools() {
   $("toggleView").setAttribute("aria-pressed", String(viewMode));
   $("viewTools").hidden = !viewMode;
@@ -162,7 +162,7 @@ function renderBoardTools() {
   document.querySelectorAll("[data-marks]").forEach((b) => b.setAttribute("aria-checked", String((b.dataset.marks === "on") === (state.showMarks !== false))));
   board.classList.toggle("hide-marks", state.showMarks === false);
   document.querySelectorAll("[data-names]").forEach((b) => b.setAttribute("aria-checked", String((b.dataset.names === "on") === (state.showNames !== false))));
-  // 👁️ 表示を開いているときは、そちらに同じ切りかえがあるので出さない
+  // 表示を開いているときは、そちらに同じ切りかえがあるので出さない
   $("clearMarks").hidden = !anyCardMarks();
   // 得点者の行が変わると、盤の ⚽ の印も変わる（得点者から数えるので）
   $("togglePen").setAttribute("aria-pressed", String(drawing));
@@ -193,7 +193,7 @@ function renderBoardTools() {
   );
 }
 
-// 👕 チーム・試合結果の欄（人数・会場の見出し・名簿・得点者・スコアの見出し・印から入るもの・内訳）を描きなおす
+// チーム・試合結果の欄（人数・会場の見出し・名簿・得点者・スコアの見出し・印から入るもの・内訳）を描きなおす
 function renderTeamPanel() {
   // チームの欄：人数（相手を出しているときは差も）
   const ours = state.players.length;
@@ -213,7 +213,7 @@ function renderTeamPanel() {
   // 得点者の見出しの右
   const goalCount = state.goals.length;
   $("goalsMeta").textContent = goalCount ? `${goalCount}点` : "";
-  // 👕 チーム・試合結果の欄の見出し：チーム名、試合結果を入れていれば間にスコア（「FC青 2 - 1 赤SC」）
+  // チーム・試合結果の欄の見出し：チーム名、試合結果を入れていれば間にスコア（「FC青 2 - 1 赤SC」）
   const played = Number(state.scoreUs) || Number(state.scoreThem) || state.goals.length;
   const score = played ? `${Number(state.scoreUs) || 0} - ${Number(state.scoreThem) || 0}` : "";
   $("teamMeta").textContent = score

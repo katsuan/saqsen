@@ -17,7 +17,7 @@ $("courtSelect").addEventListener("change", (event) => {
   selected.clear();
   render();
 });
-// 👁️ 表示：ボール・選手名を出す／出さない
+// 表示：ボール・選手名を出す／出さない
 const setShowBall = (on) => {
   if (state.showBall === on) return;
   remember();
@@ -44,9 +44,9 @@ document.querySelectorAll("[data-marks]").forEach((b) =>
     render();
   })
 );
-// 👁️ 表示の「選手名」
+// 表示の「選手名」
 document.querySelectorAll("[data-names]").forEach((b) => b.addEventListener("click", () => setShowNames(b.dataset.names === "on")));
-// 📐 並びのタブ（自チーム・相手）
+// 並びのタブ（自チーム・相手）
 $("shapeTabOurs").addEventListener("click", () => {
   shapeSide = "ours";
   render();
@@ -74,7 +74,7 @@ $("togglePen").addEventListener("click", () => {
   }
   render();
 });
-// 👁️ 表示 →「相手」：出さない／フルコート／コート別。消しても、前に並べた相手（人数・位置）は残す
+// 表示 →「相手」：出さない／フルコート／コート別。消しても、前に並べた相手（人数・位置）は残す
 $("oppLayoutNone").addEventListener("click", () => {
   if (!state.showOpp) return;
   remember();
@@ -236,7 +236,7 @@ function syncResultInputs() {
   for (const [key, selector] of Object.entries(shared)) document.querySelectorAll(selector).forEach((input) => (input.value = state[key] ?? ""));
   for (const [key, id] of Object.entries(single)) $(id).value = state[key] ?? "";
 }
-// 🏆 くみあわせに結果を戻す：同じ端末のくみあわせに残してから、くみあわせを開く（リンクにも結果をのせる）
+// くみあわせに結果を戻す：同じ端末のくみあわせに残してから、くみあわせを開く（リンクにも結果をのせる）
 $("backToQumiawase").addEventListener("click", () => {
   if (!state.qumiawase) return;
   keepQumiawaseResult();
@@ -349,7 +349,7 @@ window.addEventListener("resize", () => {
   if (board.classList.contains("is-landscape") !== updateLandscape()) render();
   else drawInk();
 });
-// コートの向き（👁️ 表示）：自動・縦・横
+// コートの向き（表示）：自動・縦・横
 document.querySelectorAll("[data-court-view]").forEach((b) =>
   b.addEventListener("click", () => {
     state.courtView = b.dataset.courtView;

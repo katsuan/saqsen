@@ -238,7 +238,7 @@ function redBallDataUrl() {
 
 // 作っているあいだにもう一度押されても、画面は1つだけ
 let savingImage = false;
-// 📷 画像で保存：作戦盤の画像を作り、保存・共有の画面を出す（作れない端末では知らせる）
+// 画像で保存：作戦盤の画像を作り、保存・共有の画面を出す（作れない端末では知らせる）
 async function saveBoardImage() {
   if (savingImage) return;
   savingImage = true;

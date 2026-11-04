@@ -11,7 +11,7 @@ const saveTactics = () => save(TACTICS_KEY, tactics);
 // いまの作戦盤の、作戦として残すところ（並び・相手・線など）の写しを返す
 const snapshot = () => JSON.parse(JSON.stringify(Object.fromEntries(TACTIC_KEYS.map((k) => [k, state[k]]))));
 
-// 📁 いまの作戦盤を、名前をつけて保存する（同じ名前なら確かめて上書き）
+// いまの作戦盤を、名前をつけて保存する（同じ名前なら確かめて上書き）
 async function saveTactic() {
   const input = $("tacticName");
   const name = input.value.trim().slice(0, 20) || `作戦 ${tactics.length + 1}`;
@@ -136,7 +136,7 @@ function renderVenues() {
   action.disabled = !place;
 }
 
-// 📁 保存した作戦の一覧（開く・名前・コピー・消す）を描きなおす
+// 保存した作戦の一覧（開く・名前・コピー・消す）を描きなおす
 function renderTactics() {
   $("tacticsMeta").textContent = tactics.length ? `${tactics.length}件` : "なし";
   $("tacticList").replaceChildren(
