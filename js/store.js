@@ -1,5 +1,5 @@
 // さくせん盤：覚えておくこと（state）。この端末に残す・端末やリンクの中身の形の確かめ・保存した作戦の形・戻す
-// ファイルは index.html に書いた順（page → formation → marks → store → link → board → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
+// ファイルは index.html に書いた順（page → formation → marks → store → link → board → tokens → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
 "use strict";
 
 const STORE_KEY = "soccer:state";

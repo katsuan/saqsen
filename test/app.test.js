@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
 
-const FILES = ["js/page.js", "js/formation.js", "js/marks.js", "js/store.js", "js/link.js", "js/board.js", "js/ink.js", "js/tactics.js", "js/sheets.js", "js/card.js", "js/image.js", "js/events.js", "app.js"];
+const FILES = ["js/page.js", "js/formation.js", "js/marks.js", "js/store.js", "js/link.js", "js/board.js", "js/tokens.js", "js/ink.js", "js/tactics.js", "js/sheets.js", "js/card.js", "js/image.js", "js/events.js", "app.js"];
 
 // どんな使い方をしても止まらない、まねの部品（書いた値は覚える）
 function fakeEl() {

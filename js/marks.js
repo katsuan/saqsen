@@ -1,5 +1,5 @@
 // さくせん盤：選手の印（イエロー・レッド・ゴール・アシスト）と、得点者・交代・結果のカードに入れる名前
-// ファイルは index.html に書いた順（page → formation → marks → store → link → board → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
+// ファイルは index.html に書いた順（page → formation → marks → store → link → board → tokens → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
 "use strict";
 
 // 選手の印（イエロー・レッド・ゴール・アシスト）。p.marks = { y: 0〜2, r: 0〜1, g: 0〜, a: 0〜 }（なければ印なし）

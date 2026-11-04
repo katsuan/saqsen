@@ -1,5 +1,5 @@
 // さくせん盤：作戦盤の画像（線・相手・ボールも入る）。保存にも、カードの写真にも使う
-// ファイルは index.html に書いた順（page → formation → marks → store → link → board → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
+// ファイルは index.html に書いた順（page → formation → marks → store → link → board → tokens → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
 "use strict";
 
 // ---- 作戦盤の画像（線・相手・ボールも入る）。保存にも、カードの写真にも使う ----

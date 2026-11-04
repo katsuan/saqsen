@@ -1,5 +1,5 @@
 // さくせん盤：送るカード（おくるんへのリンク）・送る前の見本・作戦盤の画像のカード・天気（そらくる）のリンク
-// ファイルは index.html に書いた順（page → formation → marks → store → link → board → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
+// ファイルは index.html に書いた順（page → formation → marks → store → link → board → tokens → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
 "use strict";
 
 // ---- おくるんへのリンク ----

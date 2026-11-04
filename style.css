@@ -176,7 +176,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .select { position: relative; display: block; }
 .select select { appearance: none; -webkit-appearance: none; min-height: 36px; padding: 0 32px 0 16px; border: 2px solid var(--border); border-radius: 999px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; }
 .select::after { content: ""; position: absolute; right: 12px; top: 50%; width: 16px; height: 16px; transform: translateY(-50%); background: var(--ink-soft); -webkit-mask: var(--ls-i-down) center / contain no-repeat; mask: var(--ls-i-down) center / contain no-repeat; pointer-events: none; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .toolbar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
 .tool { display: grid; justify-items: center; gap: 4px; min-height: 56px; padding: 8px 0 4px; border: 2px solid transparent; border-radius: 14px; background: var(--soft-2); color: var(--ink-soft); font: inherit; font-size: 11px; font-weight: 800; cursor: pointer; }
 .tool .tool-icon { width: 24px; height: 24px; margin: 4px 0 0; }
