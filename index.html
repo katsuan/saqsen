@@ -131,7 +131,7 @@
 
     <!-- 作戦の保存：場面ごとに配置と線を残し、次の試合でも呼び出す（この端末に残る） -->
     <details id="tacticsFold" class="ls-panel fold">
-      <summary>📁 保存した作戦 <span id="tacticsMeta" class="meta"></span></summary>
+      <summary><span class="ls-icon" data-icon="archive" aria-hidden="true"></span>保存した作戦 <span id="tacticsMeta" class="meta"></span></summary>
       <div class="save-row">
         <input id="tacticName" maxlength="20" placeholder="例：ビルドアップ、コーナーキック" list="tacticPresets">
         <button id="saveTactic" class="ls-button is-primary is-block small" type="button"><span class="ls-icon" data-icon="save" aria-hidden="true"></span>保存</button>
@@ -144,7 +144,7 @@
     <!-- チーム・試合結果：自チームと相手を左右に並べ、チーム名・色、その下にスコア・内訳・得点者・ひとこと（結果）。
          作戦盤の印（ゴール・アシスト・カード）とつながる。人数・フォーメーションは作戦盤の「並び」 -->
     <details class="ls-panel fold" id="teamFold">
-      <summary>👕 チーム・試合結果 <span id="teamMeta" class="meta"></span></summary>
+      <summary><span class="ls-icon" data-icon="team" aria-hidden="true"></span>チーム・試合結果 <span id="teamMeta" class="meta"></span></summary>
       <!-- 自チームと相手を左右に向かい合わせ、チーム名の枠の中の左に色の丸 [● チーム名]（人数・フォーメーションは作戦盤の「📐 並び」）。
            色の丸を押したとき・チーム名を入れているあいだは、下に横いっぱいの1行で選べる色（上のしっぽがそのチームの丸を指す。ろくがのアプリ版と同じ形） -->
       <div class="versus">
@@ -161,7 +161,7 @@
         <div id="colorPalette" class="color-palette" role="group" hidden></div>
       </div>
       <!-- 試合結果：スコアは上のチーム名と同じ左右（左が自チーム、右が相手） -->
-      <p class="sub-head">🏆 試合結果</p>
+      <p class="sub-head"><span class="ls-icon" data-icon="trophy" aria-hidden="true"></span>試合結果</p>
       <div class="score">
         <!-- スコアは キロっくの回数入力と同じ − 数 ＋（数は打っても入れられる） -->
         <div class="score-stepper"><button class="stepper-button" type="button" data-score="scoreUs" data-delta="-1" aria-label="自チームの得点を減らす">−</button><input id="scoreUs" type="number" inputmode="numeric" min="0" max="99" value="0" aria-label="自チームの得点"><button class="stepper-button" type="button" data-score="scoreUs" data-delta="1" aria-label="自チームの得点を増やす">＋</button></div>
@@ -170,7 +170,7 @@
       </div>
       <!-- 得点の内訳（前半・後半・延長・PK）。スコアのカードの中でたたむ。入れたものだけカードに出る -->
       <details class="fold inner">
-        <summary>⏱️ 前後半・延長・PK <span id="periodMeta" class="meta"></span></summary>
+        <summary><span class="ls-icon" data-icon="clock" aria-hidden="true"></span>前後半・延長・PK <span id="periodMeta" class="meta"></span></summary>
         <p class="hint left">上のスコアは延長も入れた最終スコア。ここは入れたものだけカードに出ます。同点のときは PK で勝ち負けを決めます。</p>
         <div class="period-row">
           <span class="ls-label">前半</span>
@@ -198,7 +198,7 @@
         </div>
       </details>
       <!-- 得点者（任意。MVP などはひとこと（結果）に書く） -->
-      <p class="sub-head">⚽ 得点者 <span id="goalsMeta" class="meta"></span></p>
+      <p class="sub-head"><span class="ls-icon" data-icon="target" aria-hidden="true"></span>得点者 <span id="goalsMeta" class="meta"></span></p>
       <!-- 得点者は選手の長押し（ゴール・OG）とつながっている。アシスト・カードは作戦盤の印のままカードに入る -->
       <p id="marksNote" class="hint left" hidden></p>
       <div id="goals" class="goals"></div>
@@ -228,7 +228,7 @@
     </details>
 
     <details class="ls-panel fold">
-      <summary>🏟️ 会場情報 <span id="infoMeta" class="meta"></span></summary>
+      <summary><span class="ls-icon" data-icon="place" aria-hidden="true"></span>会場情報 <span id="infoMeta" class="meta"></span></summary>
       <p class="hint left">入れたものだけ、送るカードに入ります。場所は「保存」すると、次から ▼ で選べます。</p>
       <div class="two">
         <label>日にち<input class="when-date" type="date"></label>
@@ -256,7 +256,7 @@
     </details>
 
     <details class="ls-panel fold">
-      <summary>👤 選手名簿 <span id="rosterCount" class="meta"></span></summary>
+      <summary><span class="ls-icon" data-icon="user" aria-hidden="true"></span>選手名簿 <span id="rosterCount" class="meta"></span></summary>
       <textarea id="roster" rows="6" placeholder="1行に1人、背番号と名前&#10;例：10 山田"></textarea>
       <p class="hint">選手を長押し → 上の名前の ✏️ で選べます。</p>
     </details>
@@ -284,8 +284,8 @@
     <!-- カードで送る：送るカードを選ぶ（2枚なら1つのメッセージに横に並ぶ）。試合結果は入れてあれば最初から選んでおく -->
     <div class="card-picks">
       <!-- それぞれのカードを、おくるんで送るときと同じ見た目で小さく見せる（タップで選ぶ・外す） -->
-      <label class="pick"><input id="pickLineup" type="checkbox" checked><span><b>📋 さくせん盤</b></span><span id="previewLineup" class="pick-preview"></span></label>
-      <label class="pick"><input id="pickResult" type="checkbox"><span><b>🏆 試合結果</b></span><span id="previewResult" class="pick-preview"></span></label>
+      <label class="pick"><input id="pickLineup" type="checkbox" checked><span><b><span class="ls-icon" data-icon="list" aria-hidden="true"></span>さくせん盤</b></span><span id="previewLineup" class="pick-preview"></span></label>
+      <label class="pick"><input id="pickResult" type="checkbox"><span><b><span class="ls-icon" data-icon="trophy" aria-hidden="true"></span>試合結果</b></span><span id="previewResult" class="pick-preview"></span></label>
       <a id="sendCards" class="ls-button is-block line is-oqrn" href="#">カードでおくるん</a>
       <p class="hint">カードは確実に届き、あとで消えません。カードのピッチをタップすると、同じ配置で開きます。</p>
     </div>

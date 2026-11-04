@@ -354,7 +354,7 @@ function renderOppQuick() {
       return cell;
     })
   );
-  const note = Object.assign(document.createElement("p"), { className: "quick-note", textContent: "ゴール・OG は試合結果の得点者に入ります\n（時間は「👕 チーム・試合結果」で編集）" });
+  const note = Object.assign(document.createElement("p"), { className: "quick-note", textContent: "ゴール・OG は試合結果の得点者に入ります\n（時間は「チーム・試合結果」で編集）" });
   $("quickMarks").replaceChildren(...top, grid, note);
 }
 

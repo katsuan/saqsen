@@ -172,7 +172,7 @@ $("shareLineup").addEventListener("click", () => {
   $("pickResult").checked = hasResult();
   // 送る前のプレビュー：それぞれのカードに入る中身を短く
   $("previewLineup").replaceChildren(lineupPreviewEl());
-  $("previewResult").replaceChildren(hasResult() ? resultPreviewEl() : el("p", "cp-empty", "まだ入れていません（「👕 チーム・試合結果」の欄で入れます）"));
+  $("previewResult").replaceChildren(hasResult() ? resultPreviewEl() : el("p", "cp-empty", "まだ入れていません（「チーム・試合結果」の欄で入れます）"));
   // 2枚のカードは、高いほうに高さをそろえる（縮めて描いているので、縮める前の大きさに直して下限にする）
   const cardsShown = [...document.querySelectorAll(".pick-preview > .cp")];
   cardsShown.forEach((c) => (c.style.minHeight = ""));
