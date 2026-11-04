@@ -351,9 +351,8 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* 背番号・名前（タップで入れる）と、選手名簿のボタン */
 .quick-title.is-edit { padding: 4px 8px; margin-left: -8px; border: 0; border-radius: 10px; background: none; color: var(--ink); font: inherit; font-size: 15px; font-weight: 800; text-align: left; cursor: pointer; }
 .quick-title.is-edit:active { background: var(--soft-2); }
-/* 名前のあとのえんぴつ・「交代」の前の入れかわりの線アイコンと、字の間 */
+/* 名前のあとのえんぴつと、字の間（「交代」の前の入れかわりは Q キットの is-text） */
 .quick-title .ls-icon { margin-left: 4px; }
-.quick-sub-open .ls-icon, .quick-subs p .ls-icon, .quick-subhead .ls-icon { margin-right: 4px; }
 .quick-edit { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 8px; }
 .quick-edit input { padding: 8px 8px; }
 .quick-roster { max-height: 84px; overflow-y: auto; }
@@ -433,11 +432,6 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .cp-subs { white-space: pre-line; }
 /* 交代前の選手の得点：🔄 の右下に小さく */
 .token .sub-goals { position: absolute; top: 4px; left: calc(50% + 18px); padding: 0 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.95); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); font-size: 8px; font-style: normal; line-height: 12px; white-space: nowrap; pointer-events: none; }
-
-/* ---- Q キットの部品の上書き（Q キットがそろえたら消す） ----
- * 選んでいるチップは、色の面ではなく濃いふちと字で（Q キットはまだツールの色。ユーザーが選んだ形。Q キットがそろえたら消す）
- */
-.ls-chip[aria-pressed="true"]:not(.color), .ls-chip[aria-checked="true"]:not(.color), .ls-chip.is-active:not(.color), .ls-chip:has(input:checked):not(.color) { border-color: var(--ls-text); background: var(--ls-surface); color: var(--ls-text); }
 
 /* ---- 暗い表示（index.html の data-ls-dark="auto"。Q キットの色は ui.css が暗くする） ----
  * ピッチ・選手の丸・送るカードの見本（.cp-*。LINE のカードの見た目）は明るいまま。

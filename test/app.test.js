@@ -41,7 +41,7 @@ function boot({ store = {}, canvas } = {}) {
     return e;
   };
   const toasts = [];
-  const LineShareUI = { ask: () => Promise.resolve(false), toast: (t) => toasts.push(t), progress: () => () => {}, firstTip() {} };
+  const LineShareUI = { icon: (name, cls = "") => Object.assign(fakeEl(), { className: `ls-icon ${cls}`.trim() }), ask: () => Promise.resolve(false), toast: (t) => toasts.push(t), progress: () => () => {}, firstTip() {} };
   const mem = { ...store };
   const ctx = vm.createContext({
     document,
@@ -208,7 +208,7 @@ test("選手の長押しメニューと案内の文は、絵文字でなく線�
   const src = fs.readFileSync(path.join(__dirname, "../js/sheets.js"), "utf8").replace(/\/\/.*$/gm, "");
   assert.ok(!/✏️|🔄/.test(src), "sheets.js に ✏️・🔄 が残っていない");
   assert.match(src, /lineIcon\("edit"\)/);
-  assert.match(src, /lineIcon\("refresh"\)/);
+  assert.match(src, /lineIcon\("refresh", "is-text"\)/);
   const html = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8").replace(/<!--[\s\S]*?-->/g, "");
   assert.ok(!/✏️|🏟/.test(html));
 });

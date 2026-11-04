@@ -61,7 +61,7 @@ function renderQuickMarks() {
     });
     // 選手の行に「交代」（入れかわりの線アイコン）
     const sub = Object.assign(document.createElement("button"), { type: "button", className: "quick-sub-open", textContent: "交代" });
-    sub.prepend(lineIcon("refresh"));
+    sub.prepend(lineIcon("refresh", "is-text"));
     sub.setAttribute("aria-pressed", String(quickSubbing));
     sub.addEventListener("click", () => {
       quickSubbing = !quickSubbing;
@@ -185,7 +185,7 @@ function subHistoryEl(p, team = "u") {
     const count = (icon, n) => (n ? `${icon}${n > 1 ? n : ""}` : "");
     const record = [count("⚽", goals), count("OG", ogs), markText(s.outMarks)].filter(Boolean).join(" ");
     const line = Object.assign(document.createElement("p"), { textContent: `${s.min ? `${s.min}' ` : ""}${out} → ${subLabel(s.inNumber, s.inName, team)}${record ? `（${out}：${record}）` : ""}` });
-    line.prepend(lineIcon("refresh"));
+    line.prepend(lineIcon("refresh", "is-text"));
     box.append(line);
   });
   const undoSub = Object.assign(document.createElement("button"), { type: "button", className: "quick-more", textContent: "最後の交代を元に戻す" });
@@ -208,7 +208,7 @@ function subHistoryEl(p, team = "u") {
 function subFormEl(p, team = "u") {
   const form = Object.assign(document.createElement("div"), { className: "quick-subform" });
   const subhead = Object.assign(document.createElement("p"), { className: "quick-subhead", textContent: `${subLabel(p.number, p.name, team) || "この選手"} と交代で入る選手` });
-  subhead.prepend(lineIcon("refresh"));
+  subhead.prepend(lineIcon("refresh", "is-text"));
   form.append(subhead);
   const row = Object.assign(document.createElement("div"), { className: "quick-edit is-sub" });
   const min = Object.assign(document.createElement("input"), { id: "subMin", inputMode: "numeric", maxLength: 4, placeholder: "分" });
@@ -292,7 +292,7 @@ function renderOppQuick() {
   const head = Object.assign(document.createElement("div"), { className: "quick-head" });
   // 相手も選手の行に「交代」（入れ替えは自由）
   const subOpen = Object.assign(document.createElement("button"), { type: "button", className: "quick-sub-open", textContent: "交代" });
-  subOpen.prepend(lineIcon("refresh"));
+  subOpen.prepend(lineIcon("refresh", "is-text"));
   subOpen.setAttribute("aria-pressed", String(oppSubbing));
   subOpen.addEventListener("click", () => {
     oppSubbing = !oppSubbing;
