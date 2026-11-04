@@ -432,6 +432,8 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .cp-subs { white-space: pre-line; }
 /* 交代前の選手の得点：🔄 の右下に小さく */
 .token .sub-goals { position: absolute; top: 4px; left: calc(50% + 18px); padding: 0 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.95); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); font-size: 8px; font-style: normal; line-height: 12px; white-space: nowrap; pointer-events: none; }
+/* こまの白い札（印・交代前の得点・GK・交代の印）の中の字は、暗い表示でも濃いまま（札は明るいまま。「⚽2」の数が見えるように） */
+.token .marks, .token .sub-goals, .token .gk, .token .sub-mark { color: #23302a; }
 
 /* ---- 暗い表示（index.html の data-ls-dark="auto"。Q キットの色は ui.css が暗くする） ----
  * ピッチ・選手の丸・送るカードの見本（.cp-*。LINE のカードの見た目）は明るいまま。

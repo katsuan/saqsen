@@ -212,3 +212,10 @@ test("選手の長押しメニューと案内の文は、絵文字でなく線�
   const html = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8").replace(/<!--[\s\S]*?-->/g, "");
   assert.ok(!/✏️|🏟/.test(html));
 });
+
+test("こまの白い札の字は、暗い表示でも濃い色に決めてある（明るい字のままだと「⚽2」の数が見えない）", () => {
+  const css = fs.readFileSync(path.join(__dirname, "../style.css"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+  const rule = css.match(/\.token \.marks, \.token \.sub-goals, \.token \.gk, \.token \.sub-mark \{([^}]*)\}/);
+  assert.ok(rule, "札の字の色のきまりがある");
+  assert.match(rule[1], /color:\s*#23302a/);
+});
