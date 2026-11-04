@@ -458,6 +458,12 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* ---- 暗い表示（index.html の data-ls-dark="auto"。Q キットの色は ui.css が暗くする） ----
  * ピッチ・選手の丸・送るカードの見本（.cp-*。LINE のカードの見た目）は明るいまま。
  */
+/* ---- Q キットの部品の上書き（Q キットがそろえたら消す） ----
+ * 何もないときの知らせは左にそろえる。選んでいるチップは、色の面ではなく濃いふちと字で（色は送るボタンだけ）
+ */
+.ls-empty { justify-items: start; text-align: left; }
+.ls-chip[aria-pressed="true"]:not(.color), .ls-chip[aria-checked="true"]:not(.color), .ls-chip.is-active:not(.color), .ls-chip:has(input:checked):not(.color) { border-color: var(--ls-text); background: var(--ls-surface); color: var(--ls-text); }
+
 @media (prefers-color-scheme: dark) {
   :root[data-ls-dark="auto"] {
     --ink: #e9efe9;
