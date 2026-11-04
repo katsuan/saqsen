@@ -203,3 +203,12 @@ test("線をたくさん描いても、作戦盤のリンクは上限の長さ�
   assert.match(url, /tab=lineup&data=/);
 });
 
+
+test("選手の長押しメニューと案内の文は、絵文字でなく線アイコン（えんぴつ・入れかわり）", () => {
+  const src = fs.readFileSync(path.join(__dirname, "../js/sheets.js"), "utf8").replace(/\/\/.*$/gm, "");
+  assert.ok(!/✏️|🔄/.test(src), "sheets.js に ✏️・🔄 が残っていない");
+  assert.match(src, /lineIcon\("edit"\)/);
+  assert.match(src, /lineIcon\("refresh"\)/);
+  const html = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8").replace(/<!--[\s\S]*?-->/g, "");
+  assert.ok(!/✏️|🏟/.test(html));
+});

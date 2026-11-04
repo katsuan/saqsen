@@ -351,6 +351,9 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* 背番号・名前（タップで入れる）と、選手名簿のボタン */
 .quick-title.is-edit { padding: 4px 8px; margin-left: -8px; border: 0; border-radius: 10px; background: none; color: var(--ink); font: inherit; font-size: 15px; font-weight: 800; text-align: left; cursor: pointer; }
 .quick-title.is-edit:active { background: var(--soft-2); }
+/* 名前のあとのえんぴつ・「交代」の前の入れかわりの線アイコンと、字の間 */
+.quick-title .ls-icon { margin-left: 4px; }
+.quick-sub-open .ls-icon, .quick-subs p .ls-icon, .quick-subhead .ls-icon { margin-right: 4px; }
 .quick-edit { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 8px; }
 .quick-edit input { padding: 8px 8px; }
 .quick-roster { max-height: 84px; overflow-y: auto; }

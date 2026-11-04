@@ -15,10 +15,10 @@ function parseRoster() {
 }
 
 // ---- 選手のポップアップ（自チームの選手を長押し）：選手のことはここだけで変える ----
-//   ・上の「10 たなか ✏️」をタップ → 背番号・名前を入れる（選手名簿からも選べる）
+//   ・上の「10 たなか」（えんぴつの印）をタップ → 背番号・名前を入れる（選手名簿からも選べる）
 //   ・印のボタンをタップ → 1つ足す（試合中の記録）。下の小さな − で1つ減らす
 //     ゴール・OG は試合結果の得点者そのもの（足すと得点者とスコアに入り、− で消える）
-//   ・上の「🔄 交代」→ 入る選手（名簿からも）と時間を入れる。丸（ポジション）はそのまま、中の人が入れかわる。
+//   ・上の「交代」→ 入る選手（名簿からも）と時間を入れる。丸（ポジション）はそのまま、中の人が入れかわる。
 //     出た選手の記録は p.subs に残る（得点は名前で得点者に残り、カード・アシストは出た選手の分として結果に入る）
 // 変えるとすぐ盤に出る。× か外を触ると閉じる
 let quickIndex = -1;
@@ -50,7 +50,8 @@ function renderQuickMarks() {
       close
     );
   } else {
-    const title = Object.assign(document.createElement("button"), { type: "button", className: "quick-title is-edit", textContent: `${`${p.number || ""} ${p.name || ""}`.trim() || "背番号・名前"} ✏️` });
+    const title = Object.assign(document.createElement("button"), { type: "button", className: "quick-title is-edit", textContent: `${p.number || ""} ${p.name || ""}`.trim() || "背番号・名前" });
+    title.append(lineIcon("edit"));
     title.setAttribute("aria-label", "背番号・名前を変える");
     title.addEventListener("click", () => {
       quickEditing = true;
@@ -58,8 +59,9 @@ function renderQuickMarks() {
       renderQuickMarks();
       $("quickName").focus();
     });
-    // 選手の行に「🔄 交代」
-    const sub = Object.assign(document.createElement("button"), { type: "button", className: "quick-sub-open", textContent: "🔄 交代" });
+    // 選手の行に「交代」（入れかわりの線アイコン）
+    const sub = Object.assign(document.createElement("button"), { type: "button", className: "quick-sub-open", textContent: "交代" });
+    sub.prepend(lineIcon("refresh"));
     sub.setAttribute("aria-pressed", String(quickSubbing));
     sub.addEventListener("click", () => {
       quickSubbing = !quickSubbing;
@@ -171,7 +173,7 @@ const subLabel = (number, name, team = "u") => name || (number ? (team === "t" ?
 // 開いているメニュー（自チームか相手）を描きなおす
 const rerenderQuick = (team) => (team === "t" ? renderOppQuick() : renderQuickMarks());
 
-// これまでの交代（「🔄 60' たなか → すずき」）と、出た選手の記録（得点は得点者から、カード・アシストは残した印から）。最後の交代は元に戻せる
+// これまでの交代（入れかわりの印 ＋「60' たなか → すずき」）と、出た選手の記録（得点は得点者から、カード・アシストは残した印から）。最後の交代は元に戻せる
 function subHistoryEl(p, team = "u") {
   const box = Object.assign(document.createElement("div"), { className: "quick-subs" });
   p.subs.forEach((s) => {
@@ -182,7 +184,9 @@ function subHistoryEl(p, team = "u") {
     // 印の数の文字（「⚽2」など。0 なら ""）を返す
     const count = (icon, n) => (n ? `${icon}${n > 1 ? n : ""}` : "");
     const record = [count("⚽", goals), count("OG", ogs), markText(s.outMarks)].filter(Boolean).join(" ");
-    box.append(Object.assign(document.createElement("p"), { textContent: `🔄 ${s.min ? `${s.min}' ` : ""}${out} → ${subLabel(s.inNumber, s.inName, team)}${record ? `（${out}：${record}）` : ""}` }));
+    const line = Object.assign(document.createElement("p"), { textContent: `${s.min ? `${s.min}' ` : ""}${out} → ${subLabel(s.inNumber, s.inName, team)}${record ? `（${out}：${record}）` : ""}` });
+    line.prepend(lineIcon("refresh"));
+    box.append(line);
   });
   const undoSub = Object.assign(document.createElement("button"), { type: "button", className: "quick-more", textContent: "最後の交代を元に戻す" });
   undoSub.addEventListener("click", () => {
@@ -203,7 +207,9 @@ function subHistoryEl(p, team = "u") {
 // 交代の入力：時間（分）・入る選手の背番号と名前（選手名簿のボタンからも。いま盤にいる選手は薄く）
 function subFormEl(p, team = "u") {
   const form = Object.assign(document.createElement("div"), { className: "quick-subform" });
-  form.append(Object.assign(document.createElement("p"), { className: "quick-subhead", textContent: `🔄 ${subLabel(p.number, p.name, team) || "この選手"} と交代で入る選手` }));
+  const subhead = Object.assign(document.createElement("p"), { className: "quick-subhead", textContent: `${subLabel(p.number, p.name, team) || "この選手"} と交代で入る選手` });
+  subhead.prepend(lineIcon("refresh"));
+  form.append(subhead);
   const row = Object.assign(document.createElement("div"), { className: "quick-edit is-sub" });
   const min = Object.assign(document.createElement("input"), { id: "subMin", inputMode: "numeric", maxLength: 4, placeholder: "分" });
   min.setAttribute("aria-label", "交代した時間（分）");
@@ -284,8 +290,9 @@ function renderOppQuick() {
   close.setAttribute("aria-label", "閉じる");
   close.addEventListener("click", closeQuickMarks);
   const head = Object.assign(document.createElement("div"), { className: "quick-head" });
-  // 相手も選手の行に「🔄 交代」（入れ替えは自由）
-  const subOpen = Object.assign(document.createElement("button"), { type: "button", className: "quick-sub-open", textContent: "🔄 交代" });
+  // 相手も選手の行に「交代」（入れ替えは自由）
+  const subOpen = Object.assign(document.createElement("button"), { type: "button", className: "quick-sub-open", textContent: "交代" });
+  subOpen.prepend(lineIcon("refresh"));
   subOpen.setAttribute("aria-pressed", String(oppSubbing));
   subOpen.addEventListener("click", () => {
     oppSubbing = !oppSubbing;
@@ -293,8 +300,9 @@ function renderOppQuick() {
     renderOppQuick();
     if (oppSubbing) $("subMin").focus();
   });
-  // 相手も「相手10番 ✏️」をタップで背番号・名前を入れられる（紅白戦など）
-  const title = Object.assign(document.createElement("button"), { type: "button", className: "quick-title is-edit", textContent: `${p.name ? `${p.number || ""} ${p.name}`.trim() : name} ✏️` });
+  // 相手も「相手10番」（えんぴつの印）をタップで背番号・名前を入れられる（紅白戦など）
+  const title = Object.assign(document.createElement("button"), { type: "button", className: "quick-title is-edit", textContent: p.name ? `${p.number || ""} ${p.name}`.trim() : name });
+  title.append(lineIcon("edit"));
   title.setAttribute("aria-label", "相手の背番号・名前を変える");
   title.addEventListener("click", () => {
     oppEditing = !oppEditing;

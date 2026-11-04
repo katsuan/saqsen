@@ -19,6 +19,14 @@
 
 // id から画面の部品を返す
 const $ = (id) => document.getElementById(id);
+// Q キットの線アイコン（<span class="ls-icon" data-icon="…">）を作る。CSS だけで出るので、Q キットの ui.js を待たなくてよい
+function lineIcon(name) {
+  const s = document.createElement("span");
+  s.className = "ls-icon";
+  s.dataset.icon = name;
+  s.setAttribute("aria-hidden", "true");
+  return s;
+}
 // 季節の絵文字（Q キットの season.js。tool-share.js があとから読む）を、うれしい瞬間の短い文にときどき足す。
 // なくても・止まっても、文はそのまま
 const seasonal = (text) => {
