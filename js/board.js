@@ -148,7 +148,7 @@ function renderFormationPanel(court) {
     if (e.key === "Enter" && !e.isComposing) $("customApply").click();
   };
   if ($("customRow").hidden) $("shapeNote").classList.remove("is-error");
-  if ($("customRow").hidden) $("shapeNote").textContent = opp && !state.showOpp ? "相手はいま出していません。「👁️ 表示」で出すか、ここでフォーメーションを選ぶと出ます。" : "";
+  if ($("customRow").hidden) $("shapeNote").textContent = opp && !state.showOpp ? "相手はいま出していません。「表示」で出すか、ここでフォーメーションを選ぶと出ます。" : "";
   renderLineShapes(opp ? "opp" : "ours");
 }
 

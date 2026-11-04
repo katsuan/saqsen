@@ -120,10 +120,10 @@
         <button id="clearMarks" class="link" type="button" hidden>カード・アシストの印をすべて消す（得点者・名前・背番号は残す）</button>
       </div>
       <div class="toolbar">
-        <button id="toggleView" class="tool" type="button" aria-pressed="false"><i class="emoji" aria-hidden="true">👁️</i><span>表示</span></button>
-        <button id="toggleShape" class="tool" type="button" aria-pressed="false"><i class="emoji" aria-hidden="true">📐</i><span>並び</span></button>
-        <button id="togglePen" class="tool" type="button" aria-pressed="false"><i class="emoji" aria-hidden="true">✏️</i><span>ペン</span></button>
-        <button id="undo" class="tool" type="button"><i class="emoji" aria-hidden="true">↩️</i><span>戻す</span></button>
+        <button id="toggleView" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="view" aria-hidden="true"></span><span>表示</span></button>
+        <button id="toggleShape" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="team" aria-hidden="true"></span><span>並び</span></button>
+        <button id="togglePen" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="edit" aria-hidden="true"></span><span>ペン</span></button>
+        <button id="undo" class="tool" type="button"><span class="ls-icon tool-icon" data-icon="undo" aria-hidden="true"></span><span>戻す</span></button>
       </div>
       <p class="hint" id="boardHint"></p>
       <button id="resetPositions" class="link reset" type="button">位置をフォーメーションに戻す</button>
@@ -134,7 +134,7 @@
       <summary>📁 保存した作戦 <span id="tacticsMeta" class="meta"></span></summary>
       <div class="save-row">
         <input id="tacticName" maxlength="20" placeholder="例：ビルドアップ、コーナーキック" list="tacticPresets">
-        <button id="saveTactic" class="ls-button is-primary is-block small" type="button">💾 保存</button>
+        <button id="saveTactic" class="ls-button is-primary is-block small" type="button"><span class="ls-icon" data-icon="save" aria-hidden="true"></span>保存</button>
       </div>
       <datalist id="tacticPresets"><option value="ビルドアップ"><option value="コーナーキック（攻め）"><option value="コーナーキック（守り）"><option value="フリーキック"><option value="キックオフ"><option value="守備の形"><option value="プレス"></datalist>
       <ul id="tacticList" class="tactic-list"></ul>
@@ -142,7 +142,7 @@
     </details>
 
     <!-- チーム・試合結果：自チームと相手を左右に並べ、チーム名・色、その下にスコア・内訳・得点者・ひとこと（結果）。
-         作戦盤の印（ゴール・アシスト・カード）とつながる。人数・フォーメーションは作戦盤の「📐 並び」 -->
+         作戦盤の印（ゴール・アシスト・カード）とつながる。人数・フォーメーションは作戦盤の「並び」 -->
     <details class="ls-panel fold" id="teamFold">
       <summary>👕 チーム・試合結果 <span id="teamMeta" class="meta"></span></summary>
       <!-- 自チームと相手を左右に向かい合わせ、チーム名の枠の中の左に色の丸 [● チーム名]（人数・フォーメーションは作戦盤の「📐 並び」）。
@@ -216,10 +216,10 @@
       </div>
       <!-- くみあわせ（トーナメント・総当たり）の「さくせん盤で開く」から来た試合のときだけ：結果をくみあわせに戻す -->
       <div id="qumiawaseBox" class="qumiawase-box" hidden>
-        <p class="hint left">🏆 くみあわせの試合です。点を入れたら、くみあわせに戻せます（ちがう端末のときは、結果のリンクを送ってね）。</p>
+        <p class="hint left">くみあわせの試合です。点を入れたら、くみあわせに戻せます（ちがう端末のときは、結果のリンクを送ってね）。</p>
         <div class="two">
-          <button id="backToQumiawase" class="ls-button is-block small" type="button">🏆 くみあわせに結果を戻す</button>
-          <button id="shareQumiawase" class="ls-button is-block small" type="button">🔗 結果のリンク</button>
+          <button id="backToQumiawase" class="ls-button is-block small" type="button"><span class="ls-icon" data-icon="trophy" aria-hidden="true"></span>くみあわせに結果を戻す</button>
+          <button id="shareQumiawase" class="ls-button is-block small" type="button"><span class="ls-icon" data-icon="link" aria-hidden="true"></span>結果のリンク</button>
         </div>
       </div>
       <!-- 次の試合の前に：スコア・内訳・得点者・ひとこと（結果）を消す（チーム名・色はそのまま） -->
@@ -244,7 +244,7 @@
         </div>
       </div>
       <!-- 場所と日にちを入れると出る：その日の天気をそらくるで見る（16日先まで） -->
-      <a id="weatherLink" class="ls-button is-block weather-link" href="#" target="_blank" rel="noopener" hidden>🌤️ 試合の日の天気<small id="weatherWhen"></small></a>
+      <a id="weatherLink" class="ls-button is-block weather-link" href="#" target="_blank" rel="noopener" hidden><span class="weather-label"><span class="ls-icon" data-icon="external" aria-hidden="true"></span>試合の日の天気</span><small id="weatherWhen"></small></a>
       <!-- 控え・集合時間などは、ひとことに改行して書く（さくせん盤のカードにそのまま入る） -->
       <label>ひとこと（作戦盤）<textarea id="lineupNote" rows="3" maxlength="200" placeholder="例：集合は8:30です&#10;控え：佐藤、鈴木、田中"></textarea></label>
       <div class="ls-chips note-presets" role="group" aria-label="ひとこと（作戦盤）のひな形">
@@ -264,7 +264,7 @@
     <!-- 共有（主）と画像の保存を横に並べる -->
     <div class="share-row">
       <button id="shareLineup" class="ls-button is-block line is-oqrn" type="button">カードでおくるん</button>
-      <button id="saveBoard" class="ls-button is-block" type="button">📷 画像で保存</button>
+      <button id="saveBoard" class="ls-button is-block" type="button"><span class="ls-icon" data-icon="save" aria-hidden="true"></span>画像で保存</button>
     </div>
   </section>
 
@@ -289,7 +289,7 @@
       <a id="sendCards" class="ls-button is-block line is-oqrn" href="#">カードでおくるん</a>
       <p class="hint">カードは確実に届き、あとで消えません。カードのピッチをタップすると、同じ配置で開きます。</p>
     </div>
-    <button id="sendBoardImage" class="choice" type="button"><b>🖼️ 作戦を画像で送る</b><small>相手・ボール・線も入ります。画像は時間がたつと消えることがあります。</small></button>
+    <button id="sendBoardImage" class="choice" type="button"><b><span class="ls-icon" data-icon="image" aria-hidden="true"></span>作戦を画像で送る</b><small>相手・ボール・線も入ります。画像は時間がたつと消えることがあります。</small></button>
     <p id="imageStatus" class="hint" aria-live="polite"></p>
     <button id="shareCancel" class="link" type="button">やめる</button>
   </div>
