@@ -311,11 +311,11 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .top { gap: 8px; }
 
 /* キャッチコピー（見出しの行のすぐ下。おくるんの「つくって、おくるん」と同じ役目） */
-/* 見出しの行は Q キット（ls-brand）。名前は少し小さく、ひとことはうすい字（色は送るボタンだけ） */
+/* 見出しの行は Q キット（ls-brand）。名前は少し小さく、ひとことはピッチの緑 */
 .ls-brand { padding: 0 4px; }
 .ls-brand-name { font-size: 20px; line-height: 1.2; }
 .ls-brand-icon { width: 28px; height: 28px; }
-.ls-brand-copy { margin: 4px 4px 0; color: var(--ink-soft); font-size: 13px; font-weight: 500; }
+.ls-brand-copy { margin: 4px 4px 0; color: var(--pitch); font-size: 13px; letter-spacing: 0.02em; }
 
 /* 列ごとの形（フォーメーションの下）：左に列の名前、右に形のボタン */
 .line-shapes { display: grid; gap: 8px; }
@@ -458,12 +458,6 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* ---- 暗い表示（index.html の data-ls-dark="auto"。Q キットの色は ui.css が暗くする） ----
  * ピッチ・選手の丸・送るカードの見本（.cp-*。LINE のカードの見た目）は明るいまま。
  */
-/* ---- Q キットの部品の上書き（Q キットがそろえたら消す） ----
- * 何もないときの知らせは左にそろえる。選んでいるチップは、色の面ではなく濃いふちと字で（色は送るボタンだけ）
- */
-.ls-empty { justify-items: start; text-align: left; }
-.ls-chip[aria-pressed="true"]:not(.color), .ls-chip[aria-checked="true"]:not(.color), .ls-chip.is-active:not(.color), .ls-chip:has(input:checked):not(.color) { border-color: var(--ls-text); background: var(--ls-surface); color: var(--ls-text); }
-
 @media (prefers-color-scheme: dark) {
   :root[data-ls-dark="auto"] {
     --ink: #e9efe9;
