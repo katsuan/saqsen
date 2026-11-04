@@ -192,3 +192,14 @@ test("得点者の ×・リンク・開閉の見出しは 44px 押せる", () =>
   assert.match(css, /\.link \{[^}]*min-height:\s*44px/);
   assert.match(css, /\.fold summary \{[^}]*min-height:\s*44px/);
 });
+
+test("線をたくさん描いても、作戦盤のリンクは上限の長さに収まる（名前・線の点を減らして入れる）", () => {
+  const app = boot();
+  app.run(`state.players.forEach((p, i) => { p.name = "とても長い名前の選手" + i; });
+    state.showOpp = true; state.opp = state.players.map((p) => ({ number: p.number, name: "", x: p.x, y: 100 - p.y }));
+    state.strokes = Array.from({ length: 30 }, (_, k) => ({ color: "#fff", points: Array.from({ length: 80 }, (_, i) => [i, (i * k) % 100]) }));`);
+  const url = app.run("boardLinkUrl()");
+  assert.ok(url.length <= app.run("LINK_MAX"), `${url.length}`);
+  assert.match(url, /tab=lineup&data=/);
+});
+
