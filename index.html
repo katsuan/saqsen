@@ -53,6 +53,13 @@
         <div id="tokens" class="tokens"></div>
         <div id="marquee" class="marquee" hidden></div>
       </div>
+      <!-- 盤のすぐ下に道具の4つ。押して出る欄（並び・ペン・表示）は、その下に出す -->
+      <div class="toolbar">
+        <button id="toggleView" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="view" aria-hidden="true"></span><span>表示</span></button>
+        <button id="toggleShape" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="team" aria-hidden="true"></span><span>並び</span></button>
+        <button id="togglePen" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="edit" aria-hidden="true"></span><span>ペン</span></button>
+        <button id="undo" class="tool" type="button"><span class="ls-icon tool-icon" data-icon="undo" aria-hidden="true"></span><span>戻す</span></button>
+      </div>
       <!-- 📐 並び：フォーメーションと列ごとの形（3 を三角に、4 をダイヤに、2 を開く・しぼる など）。盤を見ながら変えられるよう、盤のすぐ下に。
            列は盤と同じく上から FW → MF → DF の順 -->
       <div id="shapeTools" class="shape-tools" hidden>
@@ -119,12 +126,7 @@
         <p class="hint left">コートの「自動」は、横に広い画面（スマホの横向き・パソコンなど）で横のコートになります。フルコートは両チームが互い違いに、コート別は半分ずつ並びます。選手名・得点などを出さないと、画像・カードのリンクからも外します（入れたものは消えません）。</p>
         <button id="clearMarks" class="link" type="button" hidden>カード・アシストの印をすべて消す（得点者・名前・背番号は残す）</button>
       </div>
-      <div class="toolbar">
-        <button id="toggleView" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="view" aria-hidden="true"></span><span>表示</span></button>
-        <button id="toggleShape" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="team" aria-hidden="true"></span><span>並び</span></button>
-        <button id="togglePen" class="tool" type="button" aria-pressed="false"><span class="ls-icon tool-icon" data-icon="edit" aria-hidden="true"></span><span>ペン</span></button>
-        <button id="undo" class="tool" type="button"><span class="ls-icon tool-icon" data-icon="undo" aria-hidden="true"></span><span>戻す</span></button>
-      </div>
+
       <p class="hint" id="boardHint"></p>
       <button id="resetPositions" class="link reset" type="button">位置をフォーメーションに戻す</button>
     </div>
@@ -198,7 +200,7 @@
         </div>
       </details>
       <!-- 得点者（任意。MVP などはひとこと（結果）に書く） -->
-      <p class="sub-head"><span class="ls-icon" data-icon="target" aria-hidden="true"></span>得点者 <span id="goalsMeta" class="meta"></span></p>
+      <p class="sub-head"><span class="ls-icon" data-icon="ball" aria-hidden="true"></span>得点者 <span id="goalsMeta" class="meta"></span></p>
       <!-- 得点者は選手の長押し（ゴール・OG）とつながっている。アシスト・カードは作戦盤の印のままカードに入る -->
       <p id="marksNote" class="hint left" hidden></p>
       <div id="goals" class="goals"></div>
