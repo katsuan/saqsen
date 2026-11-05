@@ -246,34 +246,9 @@ async function saveBoardImage() {
     const canvas = await boardCanvas();
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
     if (!blob) return LineShareUI.toast("画像を作れませんでした。少し待って、もう一度押してね");
-    showImageSheet(blob);
+    // 保存の窓は Q キットのもの（長押しで保存・共有・ダウンロード）
+    LineShareUI.imageSheet(blob, { name: "作戦盤.png", alt: "作戦盤の画像" });
   } finally {
     savingImage = false;
   }
-}
-// 画像の保存・共有の画面（長押しで保存・共有・ダウンロード）を出す
-function showImageSheet(blob) {
-  const url = URL.createObjectURL(blob);
-  const file = new File([blob], "作戦盤.png", { type: "image/png" });
-  const sheet = document.createElement("div");
-  sheet.className = "sheet";
-  sheet.innerHTML = '<div class="sheet-card"><img alt="作戦盤の画像"><p class="hint">画像を長押しすると保存できます。</p><div class="actions"></div><button class="link" type="button">閉じる</button></div>';
-  sheet.querySelector("img").src = url;
-  const actions = sheet.querySelector(".actions");
-  if (navigator.canShare?.({ files: [file] })) {
-    const share = Object.assign(document.createElement("button"), { type: "button", className: "ls-button is-primary is-block", textContent: "📤 共有・保存" });
-    share.onclick = () => navigator.share({ files: [file] }).catch(() => {});
-    actions.append(share);
-  }
-  actions.append(Object.assign(document.createElement("a"), { className: "ls-button is-block", href: url, download: file.name, textContent: "⬇️ ダウンロード" }));
-  // 画像の画面を閉じる（画像の中身も手放す）
-  const close = () => {
-    sheet.remove();
-    URL.revokeObjectURL(url);
-  };
-  sheet.querySelector(".link").onclick = close;
-  sheet.addEventListener("click", (e) => {
-    if (e.target === sheet) close();
-  });
-  document.body.append(sheet);
 }
