@@ -2,7 +2,7 @@
 // ファイルは index.html に書いた順（page → formation → marks → store → link → board → tokens → ink → tactics → sheets → card → image → events → app.js）に読み、同じ範囲の変数（state など）を使う
 "use strict";
 
-const EDITOR_URL = "https://katsuan.github.io/soccer/"; // このページ（画像をタップしたときに開く）
+const EDITOR_URL = "https://katsuan.github.io/saqsen/"; // このページ（画像をタップしたときに開く）
 const LINK_MAX = 1000; // LINE のリンクは 1000 文字まで
 const QUMIAWASE_URL = "https://katsuan.github.io/qumiawase/"; // くみあわせ（トーナメント・総当たり）
 const QUMIAWASE_INBOX = "qumiawase:inbox"; // 同じ端末で、くみあわせへ結果を戻すところ（くみあわせの js/store.js と同じキー）

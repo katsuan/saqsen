@@ -10,7 +10,7 @@
 
 サッカー・フットサルのスタメン発表と作戦盤。選手をピッチに並べて、[おくるん](https://katsuan.github.io/oqrn/)の「お知らせカード」で LINE にカードとして送れます。試合結果のカードも作れます。GitHub Pages でそのまま動く静的サイトです。
 
-公開URL: https://katsuan.github.io/soccer/
+公開URL: https://katsuan.github.io/saqsen/
 
 
 画面の部品（見出しの行・カード・チップ・ボタン・ラベル）は、おくるんの Q キット（`https://katsuan.github.io/oqrn/shared/ui.css`。使い方はおくるんの README）の名前（`ls-brand`・`ls-panel`・`ls-chip`・`ls-chips`・`ls-button`・`ls-label`）。色と字は `style.css` の `:root`（`--ls-accent` など。紫はおくるんと同じ）。チームの色の丸・ピッチ・選手のこま・得点の欄など、さくせん盤にしかない見た目と、並ぶ数が多いぶんの大きさの調整は `style.css` に残す。
