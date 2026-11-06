@@ -8,12 +8,12 @@
 
 横長のロゴ（`logo.svg`）も同じスクリプトで作る：ピッチ（盤）の上に「SAQSEN」を白い字で並べ、最初の S・A・E・N はフォント（Jua）、Q はセンターサークル（ハーフウェーラインの真ん中）＋右下のボール。Q の後ろの S はアイコンと同じ線の S で、左下の端（選手の丸）がちょうどボールの下に隠れるところまで寄せる（形は変えない）。見出しの下に出す。
 
-サッカー・フットサルのスタメン発表と作戦盤。選手をピッチに並べて、[おくるん](https://katsuan.github.io/line-share/)の「お知らせカード」で LINE にカードとして送れます。試合結果のカードも作れます。GitHub Pages でそのまま動く静的サイトです。
+サッカー・フットサルのスタメン発表と作戦盤。選手をピッチに並べて、[おくるん](https://katsuan.github.io/oqrn/)の「お知らせカード」で LINE にカードとして送れます。試合結果のカードも作れます。GitHub Pages でそのまま動く静的サイトです。
 
 公開URL: https://katsuan.github.io/soccer/
 
 
-画面の部品（見出しの行・カード・チップ・ボタン・ラベル）は、おくるんの Q キット（`https://katsuan.github.io/line-share/shared/ui.css`。使い方はおくるんの README）の名前（`ls-brand`・`ls-panel`・`ls-chip`・`ls-chips`・`ls-button`・`ls-label`）。色と字は `style.css` の `:root`（`--ls-accent` など。紫はおくるんと同じ）。チームの色の丸・ピッチ・選手のこま・得点の欄など、さくせん盤にしかない見た目と、並ぶ数が多いぶんの大きさの調整は `style.css` に残す。
+画面の部品（見出しの行・カード・チップ・ボタン・ラベル）は、おくるんの Q キット（`https://katsuan.github.io/oqrn/shared/ui.css`。使い方はおくるんの README）の名前（`ls-brand`・`ls-panel`・`ls-chip`・`ls-chips`・`ls-button`・`ls-label`）。色と字は `style.css` の `:root`（`--ls-accent` など。紫はおくるんと同じ）。チームの色の丸・ピッチ・選手のこま・得点の欄など、さくせん盤にしかない見た目と、並ぶ数が多いぶんの大きさの調整は `style.css` に残す。
 ## できること
 
 タブは分けず1ページ。はじめて開いた人にだけ、作戦盤の上に3行の案内（Q キットの firstTip。「わかった」で消え、この端末では次から出ない。前の案内を閉じた人には出さない）。上から 作戦盤 → 保存した作戦 → チーム・試合結果 → 会場情報 → 選手名簿 → 「カードでおくるん」「画像で保存」。
@@ -72,7 +72,7 @@
 
 ファイルの名前は Q のツール共通の決まり（q-oqrn の docs/structure.md）にそろえている。
 
-おくるんのカードの URL（LIFF ID）は line-share の `shared/oqrn.js` から読む。
+おくるんのカードの URL（LIFF ID）は oqrn の `shared/oqrn.js` から読む。
 
 ## おくるんへの渡し方
 
@@ -95,4 +95,4 @@ python3 -m http.server 8795
 
 ## 紹介の窓口
 
-「📤 さくせん盤を紹介する」（ページのいちばん下）は、おくるんの `shared/tool-share.js`（`data-tool="saqsen"`）。押すとおくるんで緑の紹介カードを作って LINE に送れる（リンクのシェアも選べる）。中身は line-share の `data/hub-links.json` の `key: "saqsen"`。
+「📤 さくせん盤を紹介する」（ページのいちばん下）は、おくるんの `shared/tool-share.js`（`data-tool="saqsen"`）。押すとおくるんで緑の紹介カードを作って LINE に送れる（リンクのシェアも選べる）。中身は oqrn の `data/hub-links.json` の `key: "saqsen"`。
