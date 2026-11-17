@@ -3,65 +3,58 @@
   --accent: #6c47ff;
   --pitch: #2e8b4a;
   --line: rgba(255, 255, 255, 0.67);
-  --ink: #23302a;
-  --ink-soft: #5c6b62;
-  --border: #dbe7df;
-  --card: #ffffff;
   --soft: #eaf4ed; /* うすい緑（道具のボタン・切りかえ） */
   --soft-2: #f3f5f4; /* うすい灰（閉じる・交代の一覧） */
-  --shadow: 0 8px 24px rgba(20, 60, 40, 0.1);
-  --radius: 18px;
   --max-w: 480px;
   --font: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", system-ui, sans-serif;
 
-  /* Q キット（カード・チップ・ボタン・ラベル・見出しの行）の色と字。さくせん盤の紫はおくるんと同じ */
+  /* Q キット（カード・チップ・ボタン・ラベル・見出しの行）の色と字。さくせん盤の紫はおくるんと同じ。
+     字・ふち・地はさくせん盤の CSS でも --ls-text・--ls-subtext・--ls-line・--ls-surface を使う（暗い表示は Q キットが変える） */
   --ls-accent: var(--accent);
-  --ls-text: var(--ink);
-  --ls-subtext: var(--ink-soft);
-  --ls-line: var(--border);
+  --ls-text: #23302a;
+  --ls-subtext: #5c6b62;
+  --ls-line: #dbe7df;
   --ls-line-strong: #c9d8ce;
   --ls-bg: #e6f3ea;
-  --ls-shadow: var(--shadow);
-  --ls-radius-lg: var(--radius);
   --ls-font: var(--font);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 /* iPhone・LINE の中のブラウザで、キーボードが出て画面がずれたとき、ページの外（黒）が見えないよう、ページそのものにも背景の色 */
 html { background-color: #eef7f1; }
-body { min-height: 100vh; font-family: var(--font); font-size: 16px; line-height: 1.6; color: var(--ink); background: #eef7f1; -webkit-tap-highlight-color: transparent; }
+body { min-height: 100vh; font-family: var(--font); font-size: 16px; line-height: 1.6; color: var(--ls-text); background: #eef7f1; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: 16px 16px 48px; display: grid; gap: 16px; }
 /* 見出し：アイコン＋名前と横長のロゴを1行に（縦を詰める） */
 .top { display: grid; gap: 8px; }
-h1 { font-size: 22px; font-weight: 800; }
+h1 { font-size: 22px; font-weight: 700; }
 
 .panel { display: grid; gap: 16px; }
 /* カードは Q キット（ls-panel）。さくせん盤は中身が多いので、少し詰める */
 .ls-panel { gap: 8px; padding: 16px; border: 0; }
-.ls-label, label { font-size: 13px; font-weight: 800; color: var(--ink-soft); }
+.ls-label, label { font-size: 13px; font-weight: 700; color: var(--ls-subtext); }
 label { display: grid; gap: 4px; }
-input, textarea { width: 100%; padding: 8px 16px; border: 2px solid var(--border); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; }
+input, textarea { width: 100%; padding: 8px 16px; border: 1px solid var(--ls-line-strong); border-radius: var(--ls-radius-md); background: var(--ls-surface); color: var(--ls-text); font: inherit; font-size: 16px; }
 input:focus, textarea:focus { outline: none; border-color: var(--accent); }
-.hint { font-size: 12px; color: var(--ink-soft); }
-.meta { font-size: 12px; font-weight: 700; color: var(--ink-soft); }
+.hint { font-size: 12px; color: var(--ls-subtext); }
+.meta { font-size: 12px; font-weight: 700; color: var(--ls-subtext); }
 
 /* チップは Q キット（ls-chip）。さくせん盤は並ぶ数が多いので、小さめ */
 .ls-chips { gap: 8px; }
-.ls-chip { min-height: 36px; padding: 0 16px; border-width: 2px; font-size: 13px; font-weight: 800; }
-.ls-chip.color { width: 36px; padding: 0; border: 3px solid #fff; box-shadow: 0 0 0 1px var(--border); }
-.ls-chip.color[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--ink); }
+.ls-chip { min-height: 36px; padding: 0 16px; border-width: 2px; font-size: 13px; font-weight: 700; }
+.ls-chip.color { width: 36px; padding: 0; border: 3px solid #fff; box-shadow: 0 0 0 1px var(--ls-line); }
+.ls-chip.color[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--ls-text); }
 
 /* 見出しは1行：名前 … 中身の要約 ›。押せるところは 44px（上下に広げ、同じだけ外の余白を減らして、見た目の間は前のまま） */
-.fold summary { display: flex; align-items: center; gap: 8px; min-height: 44px; margin: -9px 0; list-style: none; cursor: pointer; font-weight: 800; }
+.fold summary { display: flex; align-items: center; gap: 8px; min-height: 44px; margin: -9px 0; list-style: none; cursor: pointer; font-weight: 700; }
 .fold summary::-webkit-details-marker { display: none; }
 .fold summary .meta { margin-left: auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.fold summary::after { content: ""; flex: none; width: 16px; height: 16px; margin-left: auto; background: var(--ink-soft); -webkit-mask: var(--ls-i-next) center / contain no-repeat; mask: var(--ls-i-next) center / contain no-repeat; transition: transform 0.2s; }
+.fold summary::after { content: ""; flex: none; width: 16px; height: 16px; margin-left: auto; background: var(--ls-subtext); -webkit-mask: var(--ls-i-next) center / contain no-repeat; mask: var(--ls-i-next) center / contain no-repeat; transition: transform 0.2s; }
 .fold summary .meta + ::after, .fold summary:has(.meta)::after { margin-left: 0; }
 .fold[open] summary::after { transform: rotate(90deg); }
 
 /* ---- ピッチ（作戦盤）。縦向きで、上が攻める向き。位置は % で持つ（送るカードと同じ） ---- */
-.board { position: relative; width: 100%; aspect-ratio: 3 / 4; border-radius: 14px; background: var(--pitch); overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+.board { position: relative; width: 100%; aspect-ratio: 3 / 4; border-radius: var(--ls-radius-md); background: var(--pitch); overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
 .pitch-lines i { position: absolute; border: 2px solid var(--line); }
 .pitch-lines .is-border { top: 4%; left: 5%; width: 90%; height: 92%; border-radius: 4px; }
 .pitch-lines .is-half { top: 50%; left: 5%; width: 90%; height: 0; border-width: 1px; }
@@ -104,12 +97,12 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .token { position: absolute; display: grid; justify-items: center; gap: 1px; width: 64px; margin-left: -32px; margin-top: -16px; cursor: grab; touch-action: none; -webkit-touch-callout: none; }
 .token b { display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid #fff; border-radius: 50%; background: var(--accent); color: #fff; font-size: 13px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
 /* 名前：白い文字がピッチの白線と重なっても読めるよう、半透明の濃い札に入れる */
-.token small { max-width: 64px; overflow: hidden; padding: 0 5px; border-radius: 999px; background: rgba(16, 36, 24, 0.72); color: #fff; font-size: 11px; font-weight: 800; line-height: 15px; white-space: nowrap; text-overflow: ellipsis; }
+.token small { max-width: 64px; overflow: hidden; padding: 0 5px; border-radius: 999px; background: rgba(16, 36, 24, 0.72); color: #fff; font-size: 11px; font-weight: 700; line-height: 15px; white-space: nowrap; text-overflow: ellipsis; }
 .token small:empty, .hide-names .token small, .hide-marks .token .marks { display: none; }
 /* 表示：左に項目名、右に選ぶボタン（同じ幅で並べる） */
 .view-tools { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px 8px; padding: 8px 4px 4px; }
 .view-tools[hidden] { display: none; }
-.view-tools > .ls-label { font-size: 12px; font-weight: 800; }
+.view-tools > .ls-label { font-size: 12px; font-weight: 700; }
 .view-tools .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; }
 .view-tools .seg .ls-chip { padding: 0 8px; font-size: 12px; white-space: nowrap; }
 .view-tools .hint, .view-tools .link { grid-column: 1 / -1; margin: 0; }
@@ -118,28 +111,28 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .token.is-dragging { cursor: grabbing; z-index: 2; }
 
 /* 押せるところは 44px（見た目の間は前のまま） */
-.link { min-height: 44px; margin: -12px 0; padding: 0 8px; border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 13px; font-weight: 700; text-decoration: underline; cursor: pointer; }
+.link { min-height: 44px; margin: -12px 0; padding: 0 8px; border: 0; background: none; color: var(--ls-subtext); font: inherit; font-size: 13px; font-weight: 700; text-decoration: underline; cursor: pointer; }
 
 .actions { display: grid; gap: 8px; }
 /* ボタンは Q キット（ls-button）。押しやすいよう大きめ */
-.ls-button { min-height: 52px; padding: 16px; font-size: 16px; font-weight: 800; }
+.ls-button { min-height: 52px; padding: 16px; font-size: 16px; font-weight: 700; }
 .ls-button.small { min-height: 42px; font-size: 14px; }
 .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
 /* くみあわせの試合のとき：結果を戻すボタン（試合結果の欄の下） */
-.qumiawase-box { display: grid; gap: 8px; padding: 8px; border-radius: 12px; background: var(--soft-2); }
+.qumiawase-box { display: grid; gap: 8px; padding: 8px; border-radius: var(--ls-radius-md); background: var(--soft-2); }
 .qumiawase-box[hidden] { display: none; }
 
 .score { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 8px; }
 .score > i { display: block; }
-.score span { padding-bottom: 8px; font-size: 22px; font-weight: 800; }
-.score input { font-size: 22px; font-weight: 800; text-align: center; }
+.score span { padding-bottom: 8px; font-size: 22px; font-weight: 700; }
+.score input { font-size: 22px; font-weight: 700; text-align: center; }
 /* スコアの − 数 ＋（キロっくの回数入力と同じ：1つの枠に、控えめな − ＋ と真ん中の数） */
-.score-stepper { display: grid; grid-template-columns: 34px minmax(0, 1fr) 34px; align-items: stretch; overflow: hidden; border: 2px solid var(--border); border-radius: 12px; background: var(--card); }
+.score-stepper { display: grid; grid-template-columns: 34px minmax(0, 1fr) 34px; align-items: stretch; overflow: hidden; border: 1px solid var(--ls-line-strong); border-radius: var(--ls-radius-md); background: var(--ls-surface); }
 .score-stepper:focus-within { border-color: var(--accent); }
 .score-stepper input { min-width: 0; padding: 0; border: 0; background: transparent; -moz-appearance: textfield; }
 .score-stepper input::-webkit-outer-spin-button, .score-stepper input::-webkit-inner-spin-button { margin: 0; -webkit-appearance: none; }
 .score-stepper input:focus { outline: none; }
-.stepper-button { min-height: 52px; padding: 0; border: 0; background: transparent; color: var(--ink-soft); font: inherit; font-size: 20px; font-weight: 400; cursor: pointer; touch-action: manipulation; }
+.stepper-button { min-height: 52px; padding: 0; border: 0; background: transparent; color: var(--ls-subtext); font: inherit; font-size: 20px; font-weight: 400; cursor: pointer; touch-action: manipulation; }
 .stepper-button:active { background: var(--ls-accent-soft); color: var(--ls-accent-ink); }
 .score.is-half input { font-size: 16px; }
 
@@ -150,16 +143,16 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .goal.is-them .scorer { grid-template-columns: minmax(0, 1fr) auto; }
 .goal input { min-width: 0; padding: 8px; font-size: 16px; }
 .goal .min { text-align: center; }
-.goal .remove { position: relative; flex: none; width: 26px; height: 26px; padding: 0; font-size: 12px; border: 1px solid var(--border); border-radius: 50%; background: var(--card); color: var(--ink-soft); cursor: pointer; }
+.goal .remove { position: relative; flex: none; width: 26px; height: 26px; padding: 0; font-size: 12px; border: 1px solid var(--ls-line); border-radius: 50%; background: var(--ls-surface); color: var(--ls-subtext); cursor: pointer; }
 .goal .remove::after { content: ""; position: absolute; inset: -9px; } /* 見た目は 26px、押せるところは 44px */
 
-.foot { font-size: 12px; color: var(--ink-soft); }
+.foot { font-size: 12px; color: var(--ls-subtext); }
 .foot a { color: inherit; }
 
 /* ---- 下から出るシート（選手の入力・画像） ---- */
 .sheet { position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-end; justify-content: center; padding: 16px; background: rgba(15, 30, 20, 0.45); }
-.sheet-card { display: grid; gap: 8px; width: min(100%, 440px); max-height: 100%; overflow: auto; padding: 16px; border-radius: 20px; background: var(--card); }
-.sheet-card img { width: 100%; border-radius: 12px; -webkit-touch-callout: default; }
+.sheet-card { display: grid; gap: 8px; width: min(100%, 440px); max-height: 100%; overflow: auto; padding: 16px; border-radius: var(--ls-radius-lg); background: var(--ls-surface); }
+.sheet-card img { width: 100%; border-radius: var(--ls-radius-md); -webkit-touch-callout: default; }
 
 /* 範囲選択 */
 .marquee { position: absolute; border: 2px dashed #fff; border-radius: 6px; background: rgba(255, 255, 255, 0.15); pointer-events: none; }
@@ -174,19 +167,19 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .board-card { gap: 8px; }
 .board-head { display: flex; align-items: center; gap: 8px; }
 .select { position: relative; display: block; }
-.select select { appearance: none; -webkit-appearance: none; min-height: 36px; padding: 0 32px 0 16px; border: 2px solid var(--border); border-radius: 999px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; }
-.select::after { content: ""; position: absolute; right: 12px; top: 50%; width: 16px; height: 16px; transform: translateY(-50%); background: var(--ink-soft); -webkit-mask: var(--ls-i-down) center / contain no-repeat; mask: var(--ls-i-down) center / contain no-repeat; pointer-events: none; }
+.select select { appearance: none; -webkit-appearance: none; min-height: 36px; padding: 0 32px 0 16px; border: 1px solid var(--ls-line-strong); border-radius: 999px; background: var(--ls-surface); color: var(--ls-text); font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+.select::after { content: ""; position: absolute; right: 12px; top: 50%; width: 16px; height: 16px; transform: translateY(-50%); background: var(--ls-subtext); -webkit-mask: var(--ls-i-down) center / contain no-repeat; mask: var(--ls-i-down) center / contain no-repeat; pointer-events: none; }
 .toolbar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
-.tool { display: grid; justify-items: center; gap: 4px; min-height: 56px; padding: 8px 0 4px; border: 2px solid transparent; border-radius: 14px; background: var(--soft-2); color: var(--ink-soft); font: inherit; font-size: 11px; font-weight: 800; cursor: pointer; }
+.tool { display: grid; justify-items: center; gap: 4px; min-height: 56px; padding: 8px 0 4px; border: 2px solid transparent; border-radius: var(--ls-radius-md); background: var(--soft-2); color: var(--ls-subtext); font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
 .tool .tool-icon { width: 24px; height: 24px; margin: 4px 0 0; }
-.tool[aria-pressed="true"] { border-color: var(--ink); background: var(--card); color: var(--ink); }
+.tool[aria-pressed="true"] { border-color: var(--ls-text); background: var(--ls-surface); color: var(--ls-text); }
 .tool:disabled { opacity: 0.4; cursor: default; }
 .pen-tools { align-items: center; justify-content: space-between; }
 
 /* LINE で共有：送り方を選ぶ */
-.choice { display: grid; gap: 4px; width: 100%; padding: 16px 16px; border: 2px solid var(--border); border-radius: 16px; background: var(--card); color: var(--ink); font: inherit; text-align: left; text-decoration: none; cursor: pointer; }
+.choice { display: grid; gap: 4px; width: 100%; padding: 16px 16px; border: 1px solid var(--ls-line-strong); border-radius: var(--ls-radius-lg); background: var(--ls-surface); color: var(--ls-text); font: inherit; text-align: left; text-decoration: none; cursor: pointer; }
 .choice b { font-size: 16px; }
-.choice small { font-size: 12px; color: var(--ink-soft); }
+.choice small { font-size: 12px; color: var(--ls-subtext); }
 .choice:disabled { opacity: 0.6; cursor: progress; }
 /* 送るカードを選ぶ（チェックの付いた札）。2枚を横に並べる（LINE でも横に並ぶので、同じ見え方に）。ボタンと説明は下に全幅 */
 /* 2枚のカードは、高いほうに高さをそろえる（札を縦いっぱいにし、カードを下まで伸ばす） */
@@ -195,8 +188,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .pick-preview > .cp { display: flex; flex-direction: column; }
 .pick-preview > .cp > .cp-body { flex: 1; align-content: start; }
 .card-picks > :not(.pick) { grid-column: 1 / -1; }
-.pick { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px 8px; padding: 8px; border: 2px solid var(--border); border-radius: 16px; background: var(--card); cursor: pointer; }
-.pick:has(input:checked) { border-color: var(--ink); }
+.pick { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px 8px; padding: 8px; border: 1px solid var(--ls-line-strong); border-radius: var(--ls-radius-lg); background: var(--ls-surface); cursor: pointer; }
+.pick:has(input:checked) { border-color: var(--ls-text); }
 .pick input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); }
 .pick > span:not(.pick-preview) { display: grid; gap: 4px; }
 .pick > span > b { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; line-height: 1.3; white-space: nowrap; }
@@ -206,10 +199,10 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 .fold:not([open]) { gap: 0; }
 
 /* 人数：− 11人 ＋ */
-.stepper { display: flex; align-items: center; border: 2px solid var(--border); border-radius: 999px; background: var(--card); }
-.stepper button { width: 32px; height: 32px; border: 0; border-radius: 50%; background: none; color: var(--ink); font: inherit; font-size: 18px; font-weight: 800; cursor: pointer; }
+.stepper { display: flex; align-items: center; border: 1px solid var(--ls-line-strong); border-radius: 999px; background: var(--ls-surface); }
+.stepper button { width: 32px; height: 32px; border: 0; border-radius: 50%; background: none; color: var(--ls-text); font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
 .stepper button:disabled { opacity: 0.3; cursor: default; }
-.stepper span { min-width: 34px; font-size: 14px; font-weight: 800; text-align: center; }
+.stepper span { min-width: 34px; font-size: 14px; font-weight: 700; text-align: center; }
 .board-card .reset { justify-self: start; }
 
 /* 保存した作戦 */
@@ -217,54 +210,43 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); }
 /* 場所：1行に 入力・▼（保存した場所。select を小さな四角に見せる）・保存／消す */
 .venue { display: grid; gap: 8px; }
 .venue-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: stretch; gap: 8px; }
-.venue-pick { position: relative; display: grid; place-items: center; width: 46px; border: 2px solid var(--border); border-radius: 12px; background: var(--card); }
+.venue-pick { position: relative; display: grid; place-items: center; width: 46px; border: 1px solid var(--ls-line-strong); border-radius: var(--ls-radius-md); background: var(--ls-surface); }
 .venue-pick[hidden] { display: none; }
-.venue-pick::after { content: ""; width: 16px; height: 16px; background: var(--ink-soft); -webkit-mask: var(--ls-i-down) center / contain no-repeat; mask: var(--ls-i-down) center / contain no-repeat; pointer-events: none; }
+.venue-pick::after { content: ""; width: 16px; height: 16px; background: var(--ls-subtext); -webkit-mask: var(--ls-i-down) center / contain no-repeat; mask: var(--ls-i-down) center / contain no-repeat; pointer-events: none; }
 .venue-pick select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; font-size: 16px; } /* 見えない欄でも 16px（iPhone が押したときに拡大しないように） */
 .venue-row .ls-button { width: auto; min-height: 46px; padding: 0 16px; }
 .venue-row .ls-button.is-remove { color: #c2410c; }
 .venue .ls-button:disabled { opacity: 0.45; }
 .save-row .ls-button { width: auto; min-height: 46px; padding: 0 16px; }
 .tactic-list { display: grid; gap: 8px; list-style: none; }
-.tactic { display: grid; gap: 8px; padding: 8px 16px; border: 2px solid var(--border); border-radius: 14px; }
-.tactic-open { display: grid; min-width: 0; border: 0; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.tactic { display: grid; gap: 8px; padding: 8px 16px; border: 1px solid var(--ls-line-strong); border-radius: var(--ls-radius-md); }
+.tactic-open { display: grid; min-width: 0; border: 0; background: none; color: var(--ls-text); font: inherit; text-align: left; cursor: pointer; }
 .tactic-open b { overflow: hidden; font-size: 15px; white-space: nowrap; text-overflow: ellipsis; }
-.tactic-open small { font-size: 12px; color: var(--ink-soft); }
+.tactic-open small { font-size: 12px; color: var(--ls-subtext); }
 .tactic-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-.tactic-actions .is-main { border-color: var(--ink); color: var(--ink); }
-.tactic-actions button { min-height: 32px; padding: 0 8px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--ink-soft); font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+.tactic-actions .is-main { border-color: var(--ls-text); color: var(--ls-text); }
+.tactic-actions button { min-height: 32px; padding: 0 8px; border: 1px solid var(--ls-line); border-radius: 999px; background: var(--ls-surface); color: var(--ls-subtext); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
 
 
 /* チームの欄：人数の − ＋ は列の幅いっぱい */
 .versus { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 16px; align-items: start; }
 
-/* チームの色：チーム名の枠の中の左に色の丸 [● チーム名]（ろくがのアプリ版の TeamField と同じ形）。
-   色のパレットを開いているあいだと、名前を入れているあいだは、枠のふちを緑に */
-.team-row { display: grid; grid-template-columns: 34px minmax(0, 1fr); align-items: stretch; gap: 4px; padding: 0 8px 0 4px; border: 2px solid var(--border); border-radius: 12px; background: var(--card); }
-.team-row.is-open, .team-row:has(input:focus) { border-color: var(--pitch); }
-.team-row input { min-width: 0; padding: 8px 0; border: 0; border-radius: 0; background: transparent; -webkit-appearance: none; appearance: none; }
-.color-dot { display: grid; place-items: center; min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer; -webkit-appearance: none; appearance: none; }
-.color-dot .swatch { width: 24px; height: 24px; box-shadow: 0 0 0 3px transparent; }
-.color-dot.is-open .swatch { box-shadow: 0 0 0 3px var(--card), 0 0 0 5px var(--pitch); } /* 開いている丸は緑のふち */
+/* チームの色：チーム名の枠の中の左に色の丸 [● チーム名]（Q キットの ls-pickfield。ろくがと同じ形）。
+   色のパレット（ls-picker。8色＋カスタム）を開いているあいだと、名前を入れているあいだは、枠のふちを緑に（Q キットの色をピッチの緑に） */
+.versus .ls-pickfield, .versus .ls-picker { --ls-accent: var(--pitch); --ls-accent-soft: var(--soft); }
+.versus .ls-picker { grid-column: 1 / -1; }
+.ls-pickfield-btn .swatch { width: 24px; height: 24px; }
 .swatch { position: relative; display: block; width: 26px; height: 26px; border: 2px solid var(--ls-line-strong); border-radius: 50%; }
 /* もう片方のチームと同じ色：選べるが見分けにくいので、少し薄くして斜めの線（白でも分かるように。ろくがと同じ） */
 .swatch.is-taken { opacity: 0.6; }
 .swatch.is-taken::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(to top right, transparent calc(50% - 1px), #7d8a82 calc(50% - 1px), #7d8a82 calc(50% + 1px), transparent calc(50% + 1px)); pointer-events: none; }
-/* カスタム：虹色の輪（選んでいる間は、まんなかをその色で）。色の入力は輪の中に隠す */
-.swatch.is-custom { overflow: hidden; border: 0; background: radial-gradient(circle, var(--c, transparent) 52%, transparent 53%), conic-gradient(#e5484d, #f5a524, #30a46c, #3e7bfa, #6c47ff, #e5484d); }
-.swatch.is-custom input { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; opacity: 0; cursor: pointer; -webkit-appearance: none; appearance: none; }
-
-/* パレット：チームの欄の下に、横いっぱいの1行（折り返さない）。8色＋カスタム */
-.color-palette { position: relative; grid-column: 1 / -1; display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); margin-top: 4px; padding: 4px; border-radius: 12px; background: var(--soft); --tail-x: 21px; }
-/* しっぽ：開いたチームの色の丸（丸のまんなかは列の左から 21px：枠のふち 2・すき間 2・丸の列の半分 17）を指す */
-.color-palette[data-for="oppColor"] { --tail-x: calc(50% + 6px + 21px); } /* 右の列は、まんなかから列のあいだ（12px）の半分だけ右から */
-.color-palette::before { content: ""; position: absolute; top: -8px; left: calc(var(--tail-x) - 9px); border: 9px solid transparent; border-top: 0; border-bottom: 8px solid var(--soft); }
-.palette-item { display: grid; place-items: center; min-width: 0; min-height: 36px; padding: 0; border: 0; background: none; cursor: pointer; -webkit-appearance: none; appearance: none; }
-.palette-item .swatch { width: min(26px, calc(100% - 8px)); height: auto; aspect-ratio: 1; }
-.palette-item[aria-pressed="true"] .swatch { box-shadow: 0 0 0 2px var(--soft), 0 0 0 4px var(--pitch); }
+.ls-picker-item .swatch, .ls-picker-item .ls-swatch { width: min(26px, calc(100% - 8px)); height: auto; aspect-ratio: 1; }
+/* カスタム：Q キットの ls-swatch is-custom（パレットの線アイコン。選んでいる間はその色）。ふちはほかの丸と同じ。色の入力は丸の中に隠す（Q キット） */
+.ls-picker-item .ls-swatch.is-custom { border: 2px solid var(--ls-line-strong); box-shadow: none; }
+.ls-picker-item .ls-swatch.is-custom::before { width: 16px; height: 16px; }
 .versus .stepper { justify-content: space-between; }
 .versus .ls-chip:not(.color) { width: 100%; }
-.count-vs { margin: 0; font-size: 14px; font-weight: 800; }
+.count-vs { margin: 0; font-size: 14px; font-weight: 700; }
 .count-vs:empty { display: none; }
 
 /* GK：チームと同じ色の丸の右下に 🧤 */
@@ -285,28 +267,28 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* スコアの上のチーム名（チームの欄で入れた名前。長ければ「…」） */
 .score .ls-label { overflow: hidden; padding-bottom: 0; font-size: 13px; text-align: center; white-space: nowrap; text-overflow: ellipsis; }
 /* 試合結果の中の小見出し（得点者・MVP） */
-.sub-head { display: flex; align-items: center; gap: 8px; margin: 4px 0 0; padding-top: 8px; border-top: 1px solid var(--border); font-size: 14px; font-weight: 800; }
+.sub-head { display: flex; align-items: center; gap: 8px; margin: 4px 0 0; padding-top: 8px; border-top: 1px solid var(--ls-line); font-size: 14px; font-weight: 700; }
 
 /* スコアのカードの中でたたむ「得点の内訳」 */
-.fold.inner { display: grid; gap: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+.fold.inner { display: grid; gap: 8px; padding-top: 8px; border-top: 1px solid var(--ls-line); }
 .fold.inner summary { font-size: 14px; }
 .fold.inner:not([open]) { gap: 0; }
 .period-row { display: grid; grid-template-columns: 3em minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 8px; }
-.period-row span:not(.ls-label) { font-size: 18px; font-weight: 800; }
-.period-row input { padding: 8px; font-size: 16px; font-weight: 800; text-align: center; }
+.period-row span:not(.ls-label) { font-size: 18px; font-weight: 700; }
+.period-row input { padding: 8px; font-size: 16px; font-weight: 700; text-align: center; }
 
 /* 見出しの行は Q キット（ls-brand）。名前は少し小さく、すぐ下のひとこと（おくるんの「つくって、おくるん」と同じ役目）はうすい字（色は送るボタンだけ） */
 .ls-brand { padding: 0 4px; }
 .ls-brand-name { font-size: 20px; line-height: 1.2; }
 .ls-brand-icon { width: 28px; height: 28px; }
-.ls-brand-copy { margin: 4px 4px 0; color: var(--ink-soft); font-size: 13px; font-weight: 600; }
+.ls-brand-copy { margin: 4px 4px 0; color: var(--ls-subtext); font-size: 13px; font-weight: 600; }
 
 /* 列ごとの形（フォーメーションの下）：左に列の名前、右に形のボタン */
 .line-shapes { display: grid; gap: 8px; }
 .line-shapes[hidden] { display: none; }
-.line-shapes-title { margin: 0; color: var(--ink-soft, #5b6b62); font-size: 12px; font-weight: 800; }
+.line-shapes-title { margin: 0; color: var(--ls-subtext); font-size: 12px; font-weight: 700; }
 .line-shape-row { display: grid; grid-template-columns: 64px minmax(0, 1fr); align-items: center; gap: 8px; }
-.line-shape-label { font-size: 12px; font-weight: 800; white-space: nowrap; }
+.line-shape-label { font-size: 12px; font-weight: 700; white-space: nowrap; }
 .line-shape-row .ls-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
 .line-shape-row .ls-chip { min-height: 34px; padding: 0 4px; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -326,30 +308,30 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 
 /* 並び：自チーム・相手のタブ（2つの切りかえ）、人数とフォーメーションのプルダウンを1行に */
 .shape-tabs { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: var(--soft-2); }
-.shape-tab { min-height: 34px; border: 0; border-radius: 999px; background: none; color: var(--ink); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
-.shape-tab[aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); }
+.shape-tab { min-height: 34px; border: 0; border-radius: 999px; background: none; color: var(--ls-text); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.shape-tab[aria-selected="true"] { background: var(--ls-surface); color: var(--ls-text); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); }
 .shape-head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px; }
 .shape-head .stepper[hidden] { display: none; }
 .shape-select { min-width: 0; }
 .shape-select select { width: 100%; }
 .custom-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
 .custom-row[hidden] { display: none; }
-.custom-row input { min-width: 0; min-height: 40px; padding: 0 16px; border: 2px solid var(--border); border-radius: 12px; font: inherit; font-size: 16px; }
+.custom-row input { min-width: 0; min-height: 40px; padding: 0 16px; border: 1px solid var(--ls-line-strong); border-radius: var(--ls-radius-md); font: inherit; font-size: 16px; }
 
 /* 長押しのメニュー：印をすぐ付ける（丸のそばに浮かせる） */
-.quick-marks { position: fixed; z-index: 30; display: grid; gap: 8px; overflow-y: auto; overscroll-behavior: contain; width: min(320px, calc(100vw - 16px)); padding: 16px; border-radius: 16px; background: var(--card); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22); }
+.quick-marks { position: fixed; z-index: 30; display: grid; gap: 8px; overflow-y: auto; overscroll-behavior: contain; width: min(320px, calc(100vw - 16px)); padding: 16px; border-radius: var(--ls-radius-lg); background: var(--ls-surface); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22); }
 .quick-marks[hidden] { display: none; }
 .quick-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.quick-title { margin: 0; font-size: 15px; font-weight: 800; }
-.quick-close { width: 32px; height: 32px; border: 0; border-radius: 50%; background: var(--soft-2); color: var(--ink-soft); font: inherit; font-size: 16px; cursor: pointer; }
+.quick-title { margin: 0; font-size: 15px; font-weight: 700; }
+.quick-close { width: 32px; height: 32px; border: 0; border-radius: 50%; background: var(--soft-2); color: var(--ls-subtext); font: inherit; font-size: 16px; cursor: pointer; }
 .quick-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
 .quick-cell { display: grid; gap: 4px; }
-.quick-note { margin: 0; color: var(--ink-soft); font-size: 11px; white-space: pre-line; }
+.quick-note { margin: 0; color: var(--ls-subtext); font-size: 11px; white-space: pre-line; }
 /* 1つ減らす：ボタンの下の小さな − */
-.quick-minus { justify-self: center; width: 34px; height: 22px; padding: 0; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--ink-soft); font: inherit; font-size: 13px; line-height: 1; cursor: pointer; }
+.quick-minus { justify-self: center; width: 34px; height: 22px; padding: 0; border: 1px solid var(--ls-line); border-radius: 999px; background: var(--ls-surface); color: var(--ls-subtext); font: inherit; font-size: 13px; line-height: 1; cursor: pointer; }
 .quick-minus:disabled { visibility: hidden; }
 /* 背番号・名前（タップで入れる）と、選手名簿のボタン */
-.quick-title.is-edit { padding: 4px 8px; margin-left: -8px; border: 0; border-radius: 10px; background: none; color: var(--ink); font: inherit; font-size: 15px; font-weight: 800; text-align: left; cursor: pointer; }
+.quick-title.is-edit { padding: 4px 8px; margin-left: -8px; border: 0; border-radius: var(--ls-radius-sm); background: none; color: var(--ls-text); font: inherit; font-size: 15px; font-weight: 700; text-align: left; cursor: pointer; }
 .quick-title.is-edit:active { background: var(--soft-2); }
 /* 名前のあとのえんぴつと、字の間（「交代」の前の入れかわりは Q キットの is-text） */
 .quick-title .ls-icon { margin-left: 4px; }
@@ -357,14 +339,14 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .quick-edit input { padding: 8px 8px; }
 .quick-roster { max-height: 84px; overflow-y: auto; }
 .quick-roster .ls-chip { min-height: 30px; padding: 0 8px; font-size: 12px; }
-.quick-mark { position: relative; display: grid; justify-items: center; gap: 4px; min-height: 60px; padding: 8px 4px 8px; border: 2px solid var(--border); border-radius: 12px; background: var(--card); font: inherit; font-size: 22px; line-height: 1; cursor: pointer; touch-action: manipulation; }
+.quick-mark { position: relative; display: grid; justify-items: center; gap: 4px; min-height: 60px; padding: 8px 4px 8px; border: 1px solid var(--ls-line-strong); border-radius: var(--ls-radius-md); background: var(--ls-surface); font: inherit; font-size: 22px; line-height: 1; cursor: pointer; touch-action: manipulation; }
 .quick-mark:active { border-color: var(--accent); background: var(--ls-accent-soft); }
-.quick-mark small { font-size: 10px; font-weight: 800; color: var(--ink-soft); white-space: nowrap; }
+.quick-mark small { font-size: 10px; font-weight: 700; color: var(--ls-subtext); white-space: nowrap; }
 .quick-mark .is-own-goal { height: 24px; width: auto; }
 .quick-mark:disabled { opacity: 0.4; }
 /* 今の数（右上の小さな丸） */
-.quick-count { position: absolute; top: -6px; right: -4px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 11px; font-style: normal; font-weight: 800; line-height: 18px; }
-.quick-more { border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 12px; font-weight: 700; text-decoration: underline; cursor: pointer; }
+.quick-count { position: absolute; top: -6px; right: -4px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 11px; font-style: normal; font-weight: 700; line-height: 18px; }
+.quick-more { border: 0; background: none; color: var(--ls-subtext); font: inherit; font-size: 12px; font-weight: 700; text-decoration: underline; cursor: pointer; }
 
 /* ひとことのひな形（タップで次の行に足す） */
 .note-presets .ls-chip { min-height: 36px; padding: 0 8px; font-size: 12px; }
@@ -374,16 +356,16 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 /* 横に2枚なので、カードは中身ごと縮めて見せる（zoom：中の並びは実物の幅のまま、小さく描く） */
 .pick-preview .cp, .pick-preview .cp-empty { zoom: 0.58; }
 .pick-preview:empty { display: none; }
-.cp { overflow: hidden; border-radius: 14px; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); color: #111827; font-size: 12px; font-weight: 400; }
+.cp { overflow: hidden; border-radius: var(--ls-radius-md); background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); color: #111827; font-size: 12px; font-weight: 400; }
 .cp-head { display: grid; gap: 2px; padding: 10px 14px; color: #fff; }
 .cp-head b { font-size: 15px; }
 .cp-head small { font-size: 10px; opacity: 0.95; }
 .cp-body { display: grid; gap: 8px; padding: 12px 14px 10px; }
-.cp-title { margin: 0; font-size: 16px; font-weight: 800; overflow-wrap: anywhere; }
-.cp-detail { margin: 0; padding: 8px 10px; border-radius: 10px; background: #e8f3ec; color: #1f3d2b; white-space: pre-line; }
-.cp-empty { margin: 0; padding: 10px; border-radius: 10px; background: #fff; color: var(--ink-soft); font-size: 12px; font-weight: 400; }
+.cp-title { margin: 0; font-size: 16px; font-weight: 700; overflow-wrap: anywhere; }
+.cp-detail { margin: 0; padding: 8px 10px; border-radius: var(--ls-radius-sm); background: #e8f3ec; color: #1f3d2b; white-space: pre-line; }
+.cp-empty { margin: 0; padding: 10px; border-radius: var(--ls-radius-sm); background: #fff; color: var(--ls-subtext); font-size: 12px; font-weight: 400; }
 /* ミニのピッチ（おくるんのスタメンカードと同じ緑と白線） */
-.cp-pitch { position: relative; height: 210px; border-radius: 10px; background: #2e8b4a; }
+.cp-pitch { position: relative; height: 210px; border-radius: var(--ls-radius-sm); background: #2e8b4a; }
 .cp-pitch.is-vs { height: 280px; }
 .cp-pitch.is-futsal { height: 175px; }
 .cp-pitch.is-futsal.is-vs { height: 222px; }
@@ -397,19 +379,19 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .cp-pitch.is-futsal .is-box-bottom { border-radius: 40px 40px 0 0; }
 .cp-token { position: absolute; display: grid; justify-items: center; width: 52px; margin-left: -26px; margin-top: -9px; }
 .cp-token b { display: grid; place-items: center; width: 18px; height: 18px; border: 1px solid #fff; border-radius: 50%; font-size: 9px; }
-.cp-token small { max-width: 52px; overflow: hidden; padding: 0 3px; border-radius: 999px; background: rgba(16, 36, 24, 0.72); color: #fff; font-size: 8px; font-weight: 800; white-space: nowrap; text-overflow: ellipsis; }
+.cp-token small { max-width: 52px; overflow: hidden; padding: 0 3px; border-radius: 999px; background: rgba(16, 36, 24, 0.72); color: #fff; font-size: 8px; font-weight: 700; white-space: nowrap; text-overflow: ellipsis; }
 .cp-gk { position: absolute; top: 8px; right: calc(50% + 4px); width: 11px; height: 11px; border-radius: 50%; background: #fff; font-size: 7px; font-style: normal; line-height: 11px; text-align: center; }
 /* 試合結果（チーム名と勝ち負け・スコア・得点） */
 .cp-teams { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 6px; text-align: center; }
 .cp-team { display: grid; justify-items: center; gap: 4px; }
 .cp-team b { font-size: 13px; overflow-wrap: anywhere; }
 .cp-vs { color: #9ca3af; font-size: 11px; }
-.cp-badge { justify-self: center; padding: 1px 12px; border-radius: 999px; color: #fff; font-size: 10px; font-weight: 800; }
+.cp-badge { justify-self: center; padding: 1px 12px; border-radius: 999px; color: #fff; font-size: 10px; font-weight: 700; }
 .cp-badge.is-win { background: #2e8b4a; }
 .cp-badge.is-lose { background: #6b7280; }
 .cp-badge.is-draw { background: #9ca3af; }
-.cp-score { margin: 0; color: #2e8b4a; font-size: 28px; font-weight: 800; line-height: 1.1; text-align: center; }
-.cp-pk { margin: 0; color: #2e8b4a; font-size: 13px; font-weight: 800; text-align: center; }
+.cp-score { margin: 0; color: #2e8b4a; font-size: 28px; font-weight: 700; line-height: 1.1; text-align: center; }
+.cp-pk { margin: 0; color: #2e8b4a; font-size: 13px; font-weight: 700; text-align: center; }
 .cp-periods { margin: 0; color: #6b7280; font-size: 11px; text-align: center; }
 .cp-goals { display: grid; gap: 2px; margin: 0; padding: 6px 0 0; border-top: 1px solid #e5e7eb; list-style: none; font-size: 12px; }
 .cp-goals .is-them { color: #6b7280; text-align: right; }
@@ -418,13 +400,13 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .card-picks #sendCards { position: sticky; bottom: 8px; z-index: 1; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18); }
 
 /* 交代：選手の行の「交代」、これまでの交代、入る選手の入力 */
-.quick-sub-open { margin-left: auto; padding: 4px 8px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--ink); font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; white-space: nowrap; }
+.quick-sub-open { margin-left: auto; padding: 4px 8px; border: 1px solid var(--ls-line); border-radius: 999px; background: var(--ls-surface); color: var(--ls-text); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
 .quick-sub-open[aria-pressed="true"] { border-color: var(--accent); background: var(--ls-accent-soft); color: var(--ls-accent-ink); }
-.quick-subs { display: grid; gap: 4px; padding: 8px 8px; border-radius: 10px; background: var(--soft-2); font-size: 12px; }
+.quick-subs { display: grid; gap: 4px; padding: 8px 8px; border-radius: var(--ls-radius-sm); background: var(--soft-2); font-size: 12px; }
 .quick-subs p { margin: 0; }
 .quick-subs .quick-more { justify-self: start; padding: 0; }
 .quick-subform { display: grid; gap: 8px; }
-.quick-subhead { margin: 0; font-size: 12px; font-weight: 800; color: var(--ink-soft); }
+.quick-subhead { margin: 0; font-size: 12px; font-weight: 700; color: var(--ls-subtext); }
 .quick-edit.is-sub { grid-template-columns: 52px 64px minmax(0, 1fr); }
 .quick-actions { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
 .quick-actions .ls-button { width: auto; min-height: 38px; padding: 0 16px; }
@@ -440,14 +422,8 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
  */
 @media (prefers-color-scheme: dark) {
   :root[data-ls-dark="auto"] {
-    --ink: #e9efe9;
-    --ink-soft: #a9b8ae;
-    --border: rgba(255, 255, 255, 0.14);
-    --card: #1b211d;
     --soft: #243029;
     --soft-2: #262d29;
-    --ls-line-strong: rgba(255, 255, 255, 0.24);
-    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     background-color: #121815;
   }
   :root[data-ls-dark="auto"] body { background: #121815; }
@@ -460,4 +436,4 @@ input[type="date"]::-webkit-date-and-time-value, input[type="time"]::-webkit-dat
 .weather-link { display: grid; gap: 0; line-height: 1.3; }
 .weather-link[hidden] { display: none; }
 .weather-label, .choice b { display: inline-flex; align-items: center; gap: 8px; }
-.weather-link small { overflow: hidden; color: var(--ink-soft); font-size: 12px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.weather-link small { overflow: hidden; color: var(--ls-subtext); font-size: 12px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }

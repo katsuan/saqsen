@@ -147,20 +147,20 @@
          作戦盤の印（ゴール・アシスト・カード）とつながる。人数・フォーメーションは作戦盤の「並び」 -->
     <details class="ls-panel fold" id="teamFold">
       <summary><span class="ls-icon" data-icon="team" aria-hidden="true"></span>チーム・試合結果 <span id="teamMeta" class="meta"></span></summary>
-      <!-- 自チームと相手を左右に向かい合わせ、チーム名の枠の中の左に色の丸 [● チーム名]（人数・フォーメーションは作戦盤の「📐 並び」）。
+      <!-- 自チームと相手を左右に向かい合わせ、チーム名の枠の中の左に色の丸 [● チーム名]（Q キットの ls-pickfield。人数・フォーメーションは作戦盤の「📐 並び」）。
            色の丸を押したとき・チーム名を入れているあいだは、下に横いっぱいの1行で選べる色（上のしっぽがそのチームの丸を指す。ろくがのアプリ版と同じ形） -->
       <div class="versus">
         <span class="ls-label">自チーム</span>
         <span class="ls-label">相手</span>
-        <div class="team-row">
-          <button id="ourColorDot" class="color-dot" type="button" aria-controls="colorPalette" aria-expanded="false"><span class="swatch"></span></button>
+        <div class="ls-pickfield">
+          <button id="ourColorDot" class="ls-pickfield-btn" type="button" aria-controls="colorPalette" aria-expanded="false"><span class="swatch"></span></button>
           <input class="team" maxlength="20" placeholder="チーム名" aria-label="チーム名">
         </div>
-        <div class="team-row">
-          <button id="oppColorDot" class="color-dot" type="button" aria-controls="colorPalette" aria-expanded="false"><span class="swatch"></span></button>
+        <div class="ls-pickfield">
+          <button id="oppColorDot" class="ls-pickfield-btn" type="button" aria-controls="colorPalette" aria-expanded="false"><span class="swatch"></span></button>
           <input class="opponent" maxlength="20" placeholder="対戦相手" aria-label="対戦相手">
         </div>
-        <div id="colorPalette" class="color-palette" role="group" hidden></div>
+        <div id="colorPalette" class="ls-picker" role="group" style="--cols: 9" hidden></div>
       </div>
       <!-- 試合結果：スコアは上のチーム名と同じ左右（左が自チーム、右が相手） -->
       <p class="sub-head"><span class="ls-icon" data-icon="trophy" aria-hidden="true"></span>試合結果</p>

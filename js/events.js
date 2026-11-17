@@ -251,7 +251,7 @@ $("shareQumiawase").addEventListener("click", async () => {
   } catch (e) {
     if (e?.name === "AbortError") return;
   }
-  LineShareUI.copy(url, { done: "結果のリンクをコピーしました。くみあわせを使っている人に送ってね", title: "結果のリンク", hint: "長押しでコピーしてね" });
+  LineShareUI.copy(url, { done: `結果のリンクをコピーしました。${Q_NAMES.qumiawase.name}を使っている人に送ってね`, title: "結果のリンク", hint: "長押しでコピーしてね" });
 });
 $("roster").value = roster;
 $("roster").addEventListener("input", () => {
@@ -323,7 +323,7 @@ if (load(TIP_KEY, false)) {
 }
 LineShareUI.firstTip(
   "saqsen",
-  ["選手はドラッグで動かす。長押しで背番号・名前・得点", "「表示」で相手・ボール、「並び」で人数と形", "「カードでおくるん」から、スタメンや試合結果を送れる"],
+  ["選手はドラッグで動かす。長押しで背番号・名前・得点", "「表示」で相手・ボール、「並び」で人数と形", `「カードで${Q_NAMES.oqrn.name}」から、スタメンや試合結果を送れる`],
   document.querySelector(".board-head")
 );
 // 送る直前に最新のリンクにする
@@ -332,7 +332,7 @@ function updateSendCards() {
   const picks = { lineup: $("pickLineup").checked, result: $("pickResult").checked };
   const count = Object.values(picks).filter(Boolean).length;
   const send = $("sendCards");
-  send.textContent = count ? `カードでおくるん（${count}枚）` : "送るカードを選んでね";
+  send.textContent = count ? `カードで${Q_NAMES.oqrn.name}（${count}枚）` : "送るカードを選んでね";
   send.classList.toggle("is-oqrn", Boolean(count)); // おくるんのマークは、送れるときだけ
   send.classList.toggle("is-disabled", !count);
   send.setAttribute("aria-disabled", String(!count));

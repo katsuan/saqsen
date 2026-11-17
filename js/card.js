@@ -260,7 +260,7 @@ async function sendBoardImage() {
     const data = await response.json().catch(() => ({}));
     if (!response.ok || !/^https:\/\//.test(data.imageUrl || "")) throw new Error(`upload ${response.status}`);
     stop();
-    $("imageStatus").textContent = "おくるんを開いています…";
+    $("imageStatus").textContent = `${Q_NAMES.oqrn.name}を開いています…`;
     location.href = boardImageCardUrl(data.imageUrl);
   } catch (error) {
     console.error(error);

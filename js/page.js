@@ -17,6 +17,16 @@
 //   app.js          入口：はじめに動かす
 "use strict";
 
+// 表示に出すサービスの名前（自分と Q のなかま）。画面の文に名前を直書きせず、ここから読む（q-oqrn の docs/structure.md「表示に出すサービスの名前」）。
+// なかまの名前の正本は q-oqrn の data/hub-links.json（テストが見比べ、かたまりの外の直書きも見つける）
+// <service-names>
+const SERVICE_NAME = { name: "さくせん盤", en: "SAQSEN" };
+const Q_NAMES = {
+  oqrn: { name: "おくるん", en: "OQRN" },
+  qumiawase: { name: "くみあわせ", en: "QumiAwase" }
+};
+// </service-names>
+
 // id から画面の部品を返す
 const $ = (id) => document.getElementById(id);
 // Q キットの線アイコン（Q キットの LineShareUI.icon。ui.js は js/ より先に読む）。cls に "is-text" で、文の頭に置くときの字との間

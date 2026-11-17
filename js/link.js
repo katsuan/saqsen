@@ -109,7 +109,7 @@ async function takeMatch(m) {
   const same = state.team === m.team && state.opponent === m.opponent;
   const filled = state.team || state.opponent || Number(state.scoreUs) || Number(state.scoreThem) || state.goals.length;
   if (filled && !same) {
-    const ok = await LineShareUI.ask({ title: "くみあわせの試合を入れますか？", text: `${m.team || "自チーム"} 対 ${m.opponent || "相手"}。いまのチーム名・色・試合結果は置きかわります（作戦盤の並び・選手はそのまま）。`, ok: "入れる" });
+    const ok = await LineShareUI.ask({ title: `${Q_NAMES.qumiawase.name}の試合を入れますか？`, text: `${m.team || "自チーム"} 対 ${m.opponent || "相手"}。いまのチーム名・色・試合結果は置きかわります（作戦盤の並び・選手はそのまま）。`, ok: "入れる" });
     if (!ok) return;
   }
   const KEYS = ["team", "opponent", "ourColor", "oppColor", "where", "whenDate", "whenTime", "scoreUs", "scoreThem", "halfUs", "halfThem", "secondUs", "secondThem", "extraUs", "extraThem", "pkUs", "pkThem", "resultNote", "goals", "qumiawase"];
@@ -128,7 +128,7 @@ async function takeMatch(m) {
   syncResultInputs();
   $("teamFold").open = true;
   $("teamFold").scrollIntoView({ block: "start" });
-  LineShareUI.toast("くみあわせの試合を入れました", {
+  LineShareUI.toast(`${Q_NAMES.qumiawase.name}の試合を入れました`, {
     actionLabel: "元に戻す",
     onAction: () => {
       Object.assign(state, JSON.parse(JSON.stringify(before)));
